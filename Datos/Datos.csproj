@@ -43,7 +43,12 @@
   <ItemGroup>
     <Compile Include="CDBuscar.cs" />
     <Compile Include="CDConexion.cs" />
+    <Compile Include="CDEjecutarNonQuery.cs" />
     <Compile Include="CDEjecutarReader.cs" />
+    <Compile Include="CDEjecutarScalar.cs" />
+    <Compile Include="CDEliminar.cs" />
+    <Compile Include="CDInsertar.cs" />
+    <Compile Include="CDModificar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

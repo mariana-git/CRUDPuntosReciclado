@@ -1,15 +1,11 @@
 ﻿using System.Data;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.OleDb;
 
 namespace Datos
 {
-    public class CDEjecutarReader : CDConexion
+    class CDEjecutarReader : CDConexion
     {
-        public DataTable Reader(string sentencia)
+        internal DataTable Reader(string sentencia)
         {
             using (OleDbConnection Conexion = Conectar())
             {

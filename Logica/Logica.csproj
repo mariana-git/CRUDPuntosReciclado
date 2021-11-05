@@ -42,6 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CLBuscar.cs" />
+    <Compile Include="CLEliminar.cs" />
+    <Compile Include="CLInsertar.cs" />
+    <Compile Include="CLModificar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

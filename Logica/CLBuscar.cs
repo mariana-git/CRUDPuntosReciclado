@@ -8,23 +8,23 @@ namespace Logica
 {
     public class CLBuscar
     {        
-        public string Parametro { private get; set; }
+        public string Palabra { private get; set; }
 
-        public DataTable Buscar ()
+        public DataTable PersonaPunto ()
         {
             CDBuscar cDBuscar = new CDBuscar();
-            if(Parametro != string.Empty)
+            if(Palabra != string.Empty)
             {
-                if (int.TryParse(Parametro, out int numero))
+                if (int.TryParse(Palabra, out int numero))
                 {
-                    using (DataTable DT = cDBuscar.BuscarConParametro(numero))
+                    using (DataTable DT = cDBuscar.PersonaPunto(numero))
                     {
                         return DT;
                     }
                 }
                 else
                 {
-                    using (DataTable DT = cDBuscar.BuscarConParametro(Parametro))
+                    using (DataTable DT = cDBuscar.PersonaPunto(Palabra))
                     {
                         return DT;
                     }
@@ -32,7 +32,63 @@ namespace Logica
             }
             else
             {
-                using (DataTable DT = cDBuscar.BuscarSinParametro())
+                using (DataTable DT = cDBuscar.PersonaPunto())
+                {
+                    return DT;
+                }
+            }
+        }
+        public DataTable Punto ()
+        {
+            CDBuscar cDBuscar = new CDBuscar();
+            if (Palabra != string.Empty)
+            {
+                if (int.TryParse(Palabra, out int numero))
+                {
+                    using (DataTable DT = cDBuscar.Punto(numero))
+                    {
+                        return DT;
+                    }
+                }
+                else
+                {
+                    using (DataTable DT = cDBuscar.Punto(Palabra))
+                    {
+                        return DT;
+                    }
+                }
+            }
+            else
+            {
+                using (DataTable DT = cDBuscar.Punto())
+                {
+                    return DT;
+                }
+            }
+        }
+        public DataTable Persona()
+        {
+            CDBuscar cDBuscar = new CDBuscar();
+            if (Palabra != string.Empty)
+            {
+                if (int.TryParse(Palabra, out int numero))
+                {
+                    using (DataTable DT = cDBuscar.Persona(numero))
+                    {
+                        return DT;
+                    }
+                }
+                else
+                {
+                    using (DataTable DT = cDBuscar.Persona(Palabra))
+                    {
+                        return DT;
+                    }
+                }
+            }
+            else
+            {
+                using (DataTable DT = cDBuscar.Persona())
                 {
                     return DT;
                 }
