@@ -38,6 +38,7 @@ namespace Datos
 
             return new CDEjecutarReader().Reader(sentencia);
         }
+
         #endregion
 
         #region PUNTOS
@@ -63,6 +64,14 @@ namespace Datos
 
             return new CDEjecutarReader().Reader(sentencia);
         }
+
+        public int PuntosScalar(int idPunto)
+        {
+            sentencia = "SELECT COUNT(*) FROM (Responsabilidades r INNER JOIN Puntos pr ON pr.idPunto = r.idPunto) " +
+                $"INNER JOIN Personas p ON r.idPersona=p.idPersona WHERE r.idPunto = {idPunto} ; ";
+
+            return new CDEjecutarScalar().Scalar(sentencia);
+        }
         #endregion
 
         #region PERSONAS
@@ -87,6 +96,14 @@ namespace Datos
             sentencia = $"SELECT * FROM Personas;";
 
             return new CDEjecutarReader().Reader(sentencia);
+        }
+
+        public int PersonasScalar(int idPersona)
+        {
+            sentencia = "SELECT COUNT(*) FROM (Responsabilidades r INNER JOIN Puntos pr ON pr.idPunto = r.idPunto) " +
+                $"INNER JOIN Personas p ON r.idPersona=p.idPersona WHERE r.idPersona = {idPersona} ; ";
+
+            return new CDEjecutarScalar().Scalar(sentencia);
         }
         #endregion
     }

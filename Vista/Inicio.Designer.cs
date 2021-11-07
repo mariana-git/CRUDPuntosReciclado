@@ -32,6 +32,12 @@ namespace Vista
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Inicio));
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.panelPrincipal = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.btnConsultar = new System.Windows.Forms.Button();
             this.btnNuevo = new System.Windows.Forms.Button();
             this.flpBotones = new System.Windows.Forms.FlowLayoutPanel();
@@ -48,6 +54,10 @@ namespace Vista
             this.btnNPersona = new System.Windows.Forms.Button();
             this.btnNResponsabilidades = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.panelPrincipal.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.flpBotones.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelBusqueda.SuspendLayout();
@@ -74,10 +84,79 @@ namespace Vista
             this.panelPrincipal.AllowDrop = true;
             this.panelPrincipal.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panelPrincipal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(35)))), ((int)(((byte)(90)))));
+            this.panelPrincipal.Controls.Add(this.label3);
+            this.panelPrincipal.Controls.Add(this.label4);
+            this.panelPrincipal.Controls.Add(this.label2);
+            this.panelPrincipal.Controls.Add(this.pictureBox6);
+            this.panelPrincipal.Controls.Add(this.pictureBox5);
+            this.panelPrincipal.Controls.Add(this.pictureBox4);
             this.panelPrincipal.Location = new System.Drawing.Point(145, 171);
             this.panelPrincipal.Name = "panelPrincipal";
             this.panelPrincipal.Size = new System.Drawing.Size(1009, 620);
             this.panelPrincipal.TabIndex = 17;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.GreenYellow;
+            this.label3.Location = new System.Drawing.Point(712, 295);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(85, 25);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Puntos";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label4.Location = new System.Drawing.Point(415, 293);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(212, 25);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Responsabilidades";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Magenta;
+            this.label2.Location = new System.Drawing.Point(255, 293);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(111, 25);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Personas";
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Image = global::Vista.Properties.Resources.persona;
+            this.pictureBox6.Location = new System.Drawing.Point(218, 98);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(180, 192);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox6.TabIndex = 2;
+            this.pictureBox6.TabStop = false;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = global::Vista.Properties.Resources.Responsabilidades;
+            this.pictureBox5.Location = new System.Drawing.Point(434, 98);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(180, 192);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox5.TabIndex = 1;
+            this.pictureBox5.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = global::Vista.Properties.Resources.Punto;
+            this.pictureBox4.Location = new System.Drawing.Point(633, 58);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(248, 272);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.TabIndex = 0;
+            this.pictureBox4.TabStop = false;
             // 
             // btnConsultar
             // 
@@ -185,7 +264,6 @@ namespace Vista
             this.panelBtnConsultar.Name = "panelBtnConsultar";
             this.panelBtnConsultar.Size = new System.Drawing.Size(122, 180);
             this.panelBtnConsultar.TabIndex = 19;
-            this.panelBtnConsultar.Visible = false;
             // 
             // btnCPunto
             // 
@@ -247,7 +325,6 @@ namespace Vista
             this.panelBtnNuevo.Name = "panelBtnNuevo";
             this.panelBtnNuevo.Size = new System.Drawing.Size(122, 180);
             this.panelBtnNuevo.TabIndex = 20;
-            this.panelBtnNuevo.Visible = false;
             // 
             // btnNPunto
             // 
@@ -327,13 +404,18 @@ namespace Vista
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(35)))), ((int)(((byte)(90)))));
             this.ClientSize = new System.Drawing.Size(1179, 814);
             this.Controls.Add(this.flpBotones);
-            this.Controls.Add(this.panelPrincipal);
             this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.panelPrincipal);
             this.Name = "Inicio";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Inicio_Load);
+            this.panelPrincipal.ResumeLayout(false);
+            this.panelPrincipal.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.flpBotones.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelBusqueda.ResumeLayout(false);
@@ -366,6 +448,12 @@ namespace Vista
         private System.Windows.Forms.Button btnNPunto;
         private System.Windows.Forms.Button btnNPersona;
         private System.Windows.Forms.Button btnNResponsabilidades;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
     }
 }
 

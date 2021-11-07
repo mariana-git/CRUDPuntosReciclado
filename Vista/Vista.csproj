@@ -101,5 +101,17 @@
   <ItemGroup>
     <None Include="Resources\papelera-de-reciclaje1.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Punto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Personas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\persona.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Responsabilidades.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

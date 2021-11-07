@@ -4,6 +4,7 @@ namespace Logica
 {
     public class CLInsertar
     {
+        #region ATRIBUTOS
         public string IDPersona { private get; set; }
         public string IDPunto { private get; set; }
         public string Nombre { private get; set; }
@@ -15,7 +16,8 @@ namespace Logica
         public string Espacio { private get; set; }
         public string Direccion { private get; set; }
         public string Responsabilidad { private get; set; }
-        
+        #endregion
+
         public bool Responsabilidades()
         {
             if (int.TryParse(IDPunto, out int iDPunto) && int.TryParse(IDPersona, out int iDPersona)

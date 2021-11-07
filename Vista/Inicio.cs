@@ -18,20 +18,21 @@ namespace Vista
         {
             InitializeComponent();
         }
+
         #region EVENTOS
 
         private void Inicio_Load(object sender, EventArgs e)
         {
             panelBtnConsultar.Visible = false;
-            panelPrincipal.Visible = false;
+            panelBtnNuevo.Visible = false;
             StartPosition = FormStartPosition.CenterScreen;
-            AcceptButton = btnConsultar;
         }
         #endregion
 
         #region BOTONES
         private void BtnConsultar_Click(object sender, EventArgs e)
         {
+
             if (panelBtnNuevo.Visible) panelBtnNuevo.Visible = false;
             if (panelBtnConsultar.Visible) panelBtnConsultar.Visible = false;
             else panelBtnConsultar.Visible = true;
@@ -48,7 +49,6 @@ namespace Vista
         private void BtnCResponsabilidades_Click(object sender, EventArgs e)
         {
             panelBtnConsultar.Visible = false;
-            panelPrincipal.Visible = true;
             AbrirUC(new ControlesDeUsuario.UcPuntoReciclado("Responsabilidades", txtBuscar.Text));
             txtBuscar.Text = "";
         }
@@ -56,7 +56,6 @@ namespace Vista
         private void BtnCPersonas_Click(object sender, EventArgs e)
         {
             panelBtnConsultar.Visible = false;
-            panelPrincipal.Visible = true;
             AbrirUC(new ControlesDeUsuario.UcPuntoReciclado("Personas",txtBuscar.Text));
             txtBuscar.Text = "";
         }
@@ -64,7 +63,6 @@ namespace Vista
         private void BtnCPunto_Click(object sender, EventArgs e)
         {
             panelBtnConsultar.Visible = false;
-            panelPrincipal.Visible = true;
             AbrirUC(new ControlesDeUsuario.UcPuntoReciclado("Puntos",txtBuscar.Text));
             txtBuscar.Text = "";
         }
@@ -72,21 +70,18 @@ namespace Vista
         private void BtnNResponsabilidades_Click(object sender, EventArgs e)
         {
             panelBtnNuevo.Visible = false;
-            panelPrincipal.Visible = true;
             AbrirUC(new ControlesDeUsuario.UcPuntoReciclado("Responsabilidades"));
         }
 
         private void BtnNPersona_Click(object sender, EventArgs e)
         {
             panelBtnNuevo.Visible = false;
-            panelPrincipal.Visible = true;
             AbrirUC(new ControlesDeUsuario.UcPuntoReciclado("Personas"));
         }
 
         private void BtnNPunto_Click(object sender, EventArgs e)
         {
             panelBtnNuevo.Visible = false;
-            panelPrincipal.Visible = true;
             AbrirUC(new ControlesDeUsuario.UcPuntoReciclado("Puntos"));
         }
         #endregion

@@ -4,8 +4,10 @@ namespace Logica
 {
     public class CLEliminar
     {
+        #region ATRIBUTOS
         public string IDPersona { private get; set; }
         public string IDPunto { private get; set; }
+        #endregion
 
         public bool Responsabilidades()
         {

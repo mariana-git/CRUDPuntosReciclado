@@ -6,18 +6,21 @@ namespace Vista.ControlesDeUsuario
 {
     public partial class UcPuntoReciclado : UserControl
     {
-        string tabla;
-        bool nuevo = false;
+        #region ATRIBUTOS
+        string tabla, palabra;
+        bool nuevo;
         readonly string fallo = "No se ha podido realizar la operación.\n\n";
         readonly string exito = "Operación realizada con éxito.\n\n";
+        #endregion
 
         #region CONSTRUCTORES
         public UcPuntoReciclado(string origen)
         {
             //CONSTRUCTOR PARA CREAR NUEVOS
-            nuevo = true;
+
             InitializeComponent();
             OpcionesDgv();
+            nuevo = true;
             tabla = origen;
             lblMensajeTop.Visible = true;
             lblMensajeTop.Text = "NUEVO REGISTRO";
@@ -56,70 +59,14 @@ namespace Vista.ControlesDeUsuario
             InitializeComponent();
             OpcionesDgv();
             LimpiarGB();
-
+            nuevo = false;
             lblMensajeTop.Visible = true;
             lblMensajeTop.Text = "(Doble click para Seleccionar)"; 
             tabla = origen;
+            palabra = parametro;
             dgvDatos.Visible = true;
 
-            switch (tabla)
-            {
-                case "Responsabilidades":
-                    try
-                    {
-                        CLBuscar cLBuscar = new CLBuscar
-                        {
-                            Palabra = parametro
-                        };
-                        dgvDatos.DataSource = cLBuscar.Responsabilidades();
-
-                        dgvDatos.Columns["idPunto"].Visible = false;
-                        dgvDatos.Columns["idPersona"].Visible = false;
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(fallo + ex.ToString());
-                    }
-                    break;
-                case "Personas":
-                    try
-                    {
-                        CLBuscar cLBuscar = new CLBuscar
-                        {
-                            Palabra = parametro
-                        };
-                        dgvDatos.DataSource = cLBuscar.Personas();
-                        gbPuntos.Visible = false;
-                        gbResponsabilidad.Visible = false;
-                        dgvDatos.Columns["idPersona"].Visible = false;
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(fallo + ex.ToString());
-                    }
-                    break;
-                case "Puntos":
-                    try
-                    {
-                        CLBuscar cLBuscar = new CLBuscar
-                        {
-                            Palabra = parametro
-                        };
-                        dgvDatos.DataSource = cLBuscar.Puntos();
-                        gbResponsabilidad.Visible = false;
-                        gbPersonas.Visible = false;
-                        dgvDatos.Columns["idPunto"].Visible = false;
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(fallo + ex.ToString());
-                    }
-                    break;
-
-                default:
-                    MessageBox.Show(fallo);
-                    break;
-            }            
+            BuscarYTraer();
         }
         #endregion
 
@@ -161,21 +108,11 @@ namespace Vista.ControlesDeUsuario
             {
                 try
                 {
-                    CLModificar cLModificar = new CLModificar()
-                    {
-                        IDPunto = lblIDPunto.Text,
-                        Denominacion = txtDenominacion.Text,
-                        DiasYHorarios = txtDiasYHorarios.Text,
-                        Espacio = txtEspacio.Text,
-                        Direccion = txtDireccion.Text,
-                    };
-                    if (cLModificar.Puntos())
-                    {
-                        MessageBox.Show(exito);
-                        dgvDatos.DataSource = new CLBuscar().Puntos();
-                        LimpiarGB();
-                    }
-                    else
+                    CLBuscar clBuscar = new CLBuscar();
+                    clBuscar.IDPunto = lblIDPunto.Text;
+                    string afecta = clBuscar.PuntosScalar();
+
+                    if(afecta == "0" && nuevo == true)
                     {
                         CLInsertar cLInsertar = new CLInsertar()
                         {
@@ -184,13 +121,30 @@ namespace Vista.ControlesDeUsuario
                             Espacio = txtEspacio.Text,
                             Direccion = txtDireccion.Text,
                         };
-                        if (cLInsertar.Puntos())
-                        {
-                            MessageBox.Show(exito);
-                            dgvDatos.DataSource = new CLBuscar().Puntos();
-                            LimpiarGB();
-                        }
+                        if (cLInsertar.Puntos()) MessageBox.Show(exito);
                         else MessageBox.Show("Verifique los datos ingresados e inténtelo nuevamente", "ALGO FALLÓ");
+                    }
+                    else
+                    {
+                        DialogResult resultado = MessageBox.Show("Si modifica este registro se actualizarán también "
+                        + afecta + " registros de la tabla RESPONSABILIDAES\n\nCONTINUAR?",
+                        "ATENCION", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+                        if (resultado == DialogResult.OK)
+                        {
+                            CLModificar cLModificar = new CLModificar()
+                            {
+                                IDPunto = lblIDPunto.Text,
+                                Denominacion = txtDenominacion.Text,
+                                DiasYHorarios = txtDiasYHorarios.Text,
+                                Espacio = txtEspacio.Text,
+                                Direccion = txtDireccion.Text,
+                            };
+                            if (cLModificar.Puntos())MessageBox.Show(exito);
+                            else MessageBox.Show("Verifique los datos ingresados e inténtelo nuevamente", "ALGO FALLÓ");
+                        }
+                        BuscarYTraer();
+                        LimpiarGB();
                     }
                 }
                 catch (Exception ex)
@@ -207,21 +161,11 @@ namespace Vista.ControlesDeUsuario
             {
                 try
                 {
-                    CLModificar cLModificar = new CLModificar()
-                    {
-                        IDPersona = lblIDPersona.Text,
-                        Nombre = txtNombre.Text,
-                        Apellido = txtApellido.Text,
-                        DNI = txtDNI.Text,
-                        Telefono = txtTelefono.Text
-                    };
-                    if (cLModificar.Personas())
-                    {
-                        MessageBox.Show(exito);
-                        dgvDatos.DataSource = new CLBuscar().Personas();
-                        LimpiarGB();
-                    }
-                    else
+                    CLBuscar clBuscar = new CLBuscar();
+                    clBuscar.IDPersona = lblIDPersona.Text;
+                    string afecta = clBuscar.PersonasScalar();
+
+                    if (afecta == "0" && nuevo == true)
                     {
                         CLInsertar cLInsertar = new CLInsertar()
                         {
@@ -230,14 +174,31 @@ namespace Vista.ControlesDeUsuario
                             DNI = txtDNI.Text,
                             Telefono = txtTelefono.Text
                         };
-                        if (cLInsertar.Personas())
-                        {
-                            MessageBox.Show(exito);
-                            dgvDatos.DataSource = new CLBuscar().Personas();
-                            LimpiarGB();
-                        }
+                        if (cLInsertar.Personas())MessageBox.Show(exito);
                         else MessageBox.Show("Verifique los datos ingresados e inténtelo nuevamente", "ALGO FALLÓ");
                     }
+                    else
+                    {
+                        DialogResult resultado = MessageBox.Show("Si modifica este registro se actualizarán también "
+                        + afecta + " registros de la tabla RESPONSABILIDAES\n\nCONTINUAR?",
+                        "ATENCION", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+                        if (resultado == DialogResult.OK)
+                        {
+                            CLModificar cLModificar = new CLModificar()
+                            {
+                                IDPersona = lblIDPersona.Text,
+                                Nombre = txtNombre.Text,
+                                Apellido = txtApellido.Text,
+                                DNI = txtDNI.Text,
+                                Telefono = txtTelefono.Text
+                            };
+                            if (cLModificar.Personas())MessageBox.Show(exito);
+                            else MessageBox.Show("Verifique los datos ingresados e inténtelo nuevamente", "ALGO FALLÓ");
+                        }
+                    }
+                    BuscarYTraer();
+                    LimpiarGB();
                     //TODO Mejorar: se puede mostrar en la grilla el registro modificado
                 }
                 catch (Exception ex)
@@ -260,12 +221,7 @@ namespace Vista.ControlesDeUsuario
                         IDPunto = lblIDPunto.Text,
                         Responsabilidad = txtResponsabilidad.Text
                     };
-                    if (cLModificar.Responsabilidades())
-                    {
-                        MessageBox.Show(exito);
-                        dgvDatos.DataSource = new CLBuscar().Responsabilidades();
-                        LimpiarGB();
-                    }
+                    if (cLModificar.Responsabilidades()) MessageBox.Show(exito);
                     else
                     {
                         CLInsertar cLInsertar = new CLInsertar()
@@ -274,14 +230,12 @@ namespace Vista.ControlesDeUsuario
                             IDPunto = lblIDPunto.Text,
                             Responsabilidad = txtResponsabilidad.Text
                         };
-                        if (cLInsertar.Responsabilidades())
-                        {
-                            MessageBox.Show(exito);
-                            dgvDatos.DataSource = new CLBuscar().Responsabilidades();
-                            LimpiarGB();
-                        }
+                        if (cLInsertar.Responsabilidades()) MessageBox.Show(exito);
                         else MessageBox.Show("Verifique los datos ingresados e inténtelo nuevamente", "ALGO FALLÓ");
                     }
+
+                    BuscarYTraer();
+                    LimpiarGB();
                     //TODO Mejorar: se puede mostrar en la grilla el registro modificado
                 }
                 catch (Exception ex)
@@ -349,7 +303,13 @@ namespace Vista.ControlesDeUsuario
 
         private void BtnEliminarPunto_Click(object sender, EventArgs e)
         {
-            DialogResult resultado = MessageBox.Show("Se eliminará el registro de forma permanente", "ATENCION", MessageBoxButtons.OKCancel,MessageBoxIcon.Warning);
+            CLBuscar clBuscar = new CLBuscar();
+            clBuscar.IDPunto = lblIDPunto.Text;
+            
+            DialogResult resultado = MessageBox.Show("Si elimina este registro se borrarán también"
+                + clBuscar.PuntosScalar() +" registros de la tabla RESPONSABILIDAES\n\nCONTINUAR?", 
+                "ATENCION", MessageBoxButtons.OKCancel,MessageBoxIcon.Warning);
+            
             if( resultado == DialogResult.OK)
             {
                 try
@@ -377,7 +337,13 @@ namespace Vista.ControlesDeUsuario
 
         private void BtnEliminarPersona_Click(object sender, EventArgs e)
         {
-            DialogResult resultado = MessageBox.Show("Se eliminará el registro de forma permanente", "ATENCION", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            CLBuscar clBuscar = new CLBuscar();
+            clBuscar.IDPersona = lblIDPersona.Text;
+
+            DialogResult resultado = MessageBox.Show("Si elimina este registro se borrarán también "
+                + clBuscar.PersonasScalar() + " registros de la tabla RESPONSABILIDAES\n\nCONTINUAR?",
+                "ATENCION", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
             if (resultado == DialogResult.OK)
             {
                 try
@@ -504,6 +470,7 @@ namespace Vista.ControlesDeUsuario
                 txtEspacio.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["ESPACIO"].Value.ToString();
                 txtDireccion.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["DIRECCION"].Value.ToString();
             }
+            //TODO MEJORAR: se podria hacer en cascada, para no reescribir codigo
         }
 
         private void TextBoxEditables(GroupBox gb)
@@ -580,6 +547,68 @@ namespace Vista.ControlesDeUsuario
                         }
                     }
                 }
+            }
+        }
+
+        private void BuscarYTraer()
+        {
+            switch (tabla)
+            {
+                case "Responsabilidades":
+                    try
+                    {
+                        CLBuscar cLBuscar = new CLBuscar
+                        {
+                            Palabra = palabra
+                        };
+                        dgvDatos.DataSource = cLBuscar.Responsabilidades();
+
+                        dgvDatos.Columns["idPunto"].Visible = false;
+                        dgvDatos.Columns["idPersona"].Visible = false;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(fallo + ex.ToString());
+                    }
+                    break;
+                case "Personas":
+                    try
+                    {
+                        CLBuscar cLBuscar = new CLBuscar
+                        {
+                            Palabra = palabra
+                        };
+                        dgvDatos.DataSource = cLBuscar.Personas();
+                        gbPuntos.Visible = false;
+                        gbResponsabilidad.Visible = false;
+                        dgvDatos.Columns["idPersona"].Visible = false;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(fallo + ex.ToString());
+                    }
+                    break;
+                case "Puntos":
+                    try
+                    {
+                        CLBuscar cLBuscar = new CLBuscar
+                        {
+                            Palabra = palabra
+                        };
+                        dgvDatos.DataSource = cLBuscar.Puntos();
+                        gbResponsabilidad.Visible = false;
+                        gbPersonas.Visible = false;
+                        dgvDatos.Columns["idPunto"].Visible = false;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(fallo + ex.ToString());
+                    }
+                    break;
+
+                default:
+                    MessageBox.Show(fallo);
+                    break;
             }
         }
 
