@@ -7,15 +7,21 @@ namespace Vista.ControlesDeUsuario
     public partial class UcPuntoReciclado : UserControl
     {
         string tabla;
-        bool nuevo =false;
+        bool nuevo = false;
+        readonly string fallo = "No se ha podido realizar la operación.\n\n";
+        readonly string exito = "Operación realizada con éxito.\n\n";
+
         #region CONSTRUCTORES
         public UcPuntoReciclado(string origen)
         {
+            //CONSTRUCTOR PARA CREAR NUEVOS
+            nuevo = true;
             InitializeComponent();
             OpcionesDgv();
             tabla = origen;
             lblMensajeTop.Visible = true;
             lblMensajeTop.Text = "NUEVO REGISTRO";
+            LimpiarGB();
 
             if (origen == "Personas")
             {
@@ -31,14 +37,12 @@ namespace Vista.ControlesDeUsuario
                 TextBoxEditables(gbPuntos);
                 btnGuardarPunto.Visible = true;
             }
-            if (origen == "PersonaPunto")
+            if (origen == "Responsabilidades")
             {
                 gbPersonas.Visible = true;
                 gbResponsabilidad.Visible = true;
                 gbPuntos.Visible = true;
                 TextBoxEditables(gbResponsabilidad);
-                TextBoxNoEditables(gbPersonas);
-                TextBoxNoEditables(gbPuntos);
                 btnGuardarResp.Visible = true;
                 btnBuscarPersona.Visible = true;
                 btnBuscarPunto.Visible = true;
@@ -48,28 +52,33 @@ namespace Vista.ControlesDeUsuario
         }
         public UcPuntoReciclado(string origen,string parametro)
         {
+            //CONSTRUCTOR DE BUSQUEDA
             InitializeComponent();
             OpcionesDgv();
-            lblMensajeTop.Text = "(Doble click para Seleccionar)";
-            TextBoxNoEditables(gbPersonas);
-            TextBoxNoEditables(gbPuntos);
-            TextBoxNoEditables(gbResponsabilidad);     
+            LimpiarGB();
+
+            lblMensajeTop.Visible = true;
+            lblMensajeTop.Text = "(Doble click para Seleccionar)"; 
             tabla = origen;
             dgvDatos.Visible = true;
+
             switch (tabla)
             {
-                case "PersonaPunto":
+                case "Responsabilidades":
                     try
                     {
                         CLBuscar cLBuscar = new CLBuscar
                         {
                             Palabra = parametro
                         };
-                        dgvDatos.DataSource = cLBuscar.PersonaPunto();
+                        dgvDatos.DataSource = cLBuscar.Responsabilidades();
+
+                        dgvDatos.Columns["idPunto"].Visible = false;
+                        dgvDatos.Columns["idPersona"].Visible = false;
                     }
-                    catch (Exception error)
+                    catch (Exception ex)
                     {
-                        MessageBox.Show("NO FUE POSIBLE REALIZAR LA ACCIÓN\n\n" + error.ToString(), "Vuelva a intentarlo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(fallo + ex.ToString());
                     }
                     break;
                 case "Personas":
@@ -79,13 +88,14 @@ namespace Vista.ControlesDeUsuario
                         {
                             Palabra = parametro
                         };
-                        dgvDatos.DataSource = cLBuscar.Persona();
+                        dgvDatos.DataSource = cLBuscar.Personas();
                         gbPuntos.Visible = false;
                         gbResponsabilidad.Visible = false;
+                        dgvDatos.Columns["idPersona"].Visible = false;
                     }
-                    catch (Exception error)
+                    catch (Exception ex)
                     {
-                        MessageBox.Show("NO FUE POSIBLE REALIZAR LA ACCIÓN\n\n" + error.ToString(), "Vuelva a intentarlo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(fallo + ex.ToString());
                     }
                     break;
                 case "Puntos":
@@ -95,21 +105,21 @@ namespace Vista.ControlesDeUsuario
                         {
                             Palabra = parametro
                         };
-                        dgvDatos.DataSource = cLBuscar.Punto();
+                        dgvDatos.DataSource = cLBuscar.Puntos();
                         gbResponsabilidad.Visible = false;
                         gbPersonas.Visible = false;
+                        dgvDatos.Columns["idPunto"].Visible = false;
                     }
-                    catch (Exception error)
+                    catch (Exception ex)
                     {
-                        MessageBox.Show("NO FUE POSIBLE REALIZAR LA ACCIÓN\n\n" + error.ToString(), "Vuelva a intentarlo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(fallo + ex.ToString());
                     }
                     break;
 
                 default:
-                    MessageBox.Show("NO FUE POSIBLE REALIZAR LA ACCIÓN\n\nVuelva a intentarlo","ERROR", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(fallo);
                     break;
-            }
-            
+            }            
         }
         #endregion
 
@@ -124,6 +134,7 @@ namespace Vista.ControlesDeUsuario
         {
             btnGuardarResp.Visible = true;
             btnModificarResp.Visible = false;
+            btnEliminarResp.Visible = false;
             TextBoxEditables(gbResponsabilidad);
         }
 
@@ -131,6 +142,7 @@ namespace Vista.ControlesDeUsuario
         {
             btnGuardarPersona.Visible = true;
             btnModificarPersona.Visible = false;
+            btnEliminarPersona.Visible = false;
             TextBoxEditables(gbPersonas);
         }
 
@@ -138,6 +150,7 @@ namespace Vista.ControlesDeUsuario
         {
             btnGuardarPunto.Visible = true;
             btnModificarPunto.Visible = false;
+            btnEliminarPunto.Visible = false;
             TextBoxEditables(gbPuntos);
         }
 
@@ -156,7 +169,12 @@ namespace Vista.ControlesDeUsuario
                         Espacio = txtEspacio.Text,
                         Direccion = txtDireccion.Text,
                     };
-                    if (cLModificar.Puntos()) MessageBox.Show("Registro actualizado con éxito");
+                    if (cLModificar.Puntos())
+                    {
+                        MessageBox.Show(exito);
+                        dgvDatos.DataSource = new CLBuscar().Puntos();
+                        LimpiarGB();
+                    }
                     else
                     {
                         CLInsertar cLInsertar = new CLInsertar()
@@ -166,15 +184,19 @@ namespace Vista.ControlesDeUsuario
                             Espacio = txtEspacio.Text,
                             Direccion = txtDireccion.Text,
                         };
-                        if (cLInsertar.Puntos()) MessageBox.Show("Registro creado con éxito");
+                        if (cLInsertar.Puntos())
+                        {
+                            MessageBox.Show(exito);
+                            dgvDatos.DataSource = new CLBuscar().Puntos();
+                            LimpiarGB();
+                        }
                         else MessageBox.Show("Verifique los datos ingresados e inténtelo nuevamente", "ALGO FALLÓ");
                     }
-                    Dispose();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    MessageBox.Show("No se ha podido modificar el registro.\n\n Verificque los datos ingresados e intente nuevamente");
-                }        
+                    MessageBox.Show(fallo + ex.ToString());
+                }                
             }
         }
 
@@ -193,7 +215,12 @@ namespace Vista.ControlesDeUsuario
                         DNI = txtDNI.Text,
                         Telefono = txtTelefono.Text
                     };
-                    if (cLModificar.Personas()) MessageBox.Show("Registro actualizado con éxito");
+                    if (cLModificar.Personas())
+                    {
+                        MessageBox.Show(exito);
+                        dgvDatos.DataSource = new CLBuscar().Personas();
+                        LimpiarGB();
+                    }
                     else
                     {
                         CLInsertar cLInsertar = new CLInsertar()
@@ -203,19 +230,21 @@ namespace Vista.ControlesDeUsuario
                             DNI = txtDNI.Text,
                             Telefono = txtTelefono.Text
                         };
-                        if (cLInsertar.Personas()) MessageBox.Show("Registro creado con éxito");                        
+                        if (cLInsertar.Personas())
+                        {
+                            MessageBox.Show(exito);
+                            dgvDatos.DataSource = new CLBuscar().Personas();
+                            LimpiarGB();
+                        }
                         else MessageBox.Show("Verifique los datos ingresados e inténtelo nuevamente", "ALGO FALLÓ");
                     }
-                    Dispose();
                     //TODO Mejorar: se puede mostrar en la grilla el registro modificado
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    MessageBox.Show("No se ha podido modificar el registro.\n\n Verificque los datos ingresados e intente nuevamente");
-                }
-                
+                    MessageBox.Show(fallo + ex.ToString());
+                }                
             }
-
         }
 
         private void BtnGuardarResp_Click(object sender, EventArgs e)
@@ -231,7 +260,12 @@ namespace Vista.ControlesDeUsuario
                         IDPunto = lblIDPunto.Text,
                         Responsabilidad = txtResponsabilidad.Text
                     };
-                    if (cLModificar.PersonaPunto()) MessageBox.Show("Registro actualizado con éxito");
+                    if (cLModificar.Responsabilidades())
+                    {
+                        MessageBox.Show(exito);
+                        dgvDatos.DataSource = new CLBuscar().Responsabilidades();
+                        LimpiarGB();
+                    }
                     else
                     {
                         CLInsertar cLInsertar = new CLInsertar()
@@ -240,63 +274,41 @@ namespace Vista.ControlesDeUsuario
                             IDPunto = lblIDPunto.Text,
                             Responsabilidad = txtResponsabilidad.Text
                         };
-                        if (cLInsertar.Responsabilidades()) 
+                        if (cLInsertar.Responsabilidades())
                         {
-                            MessageBox.Show("Registro Agregado con éxito");
-                            Dispose();
+                            MessageBox.Show(exito);
+                            dgvDatos.DataSource = new CLBuscar().Responsabilidades();
+                            LimpiarGB();
                         }
                         else MessageBox.Show("Verifique los datos ingresados e inténtelo nuevamente", "ALGO FALLÓ");
                     }
-                    Dispose();
                     //TODO Mejorar: se puede mostrar en la grilla el registro modificado
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    MessageBox.Show("No se ha podido modificar el registro.\n\n Verificque los datos ingresados e intente nuevamente");
+                    MessageBox.Show(fallo + ex.ToString());
                 }
             }
         }
 
         private void BtnAtrasPunto_Click(object sender, EventArgs e)
         {
-            LimpiarTextBox(gbPuntos);
-            TextBoxNoEditables(gbPuntos);
-            btnGuardarPunto.Visible = false;
-            btnAtrasPunto.Visible = false;
-            btnModificarPunto.Visible = false;
-            lblIDPunto.Text = "";
+            LimpiarGB();
         }
 
         private void BtnAtrasPersona_Click(object sender, EventArgs e)
         {
-            LimpiarTextBox(gbPersonas);
-            TextBoxNoEditables(gbPersonas);
-            lblIDPersona.Text = "";
-            btnAtrasPersona.Visible = false;
-            btnGuardarPersona.Visible = false;
-            btnModificarPersona.Visible = false;
+            LimpiarGB();
         }
 
         private void BtnAtrasResp_Click(object sender, EventArgs e)
         {
-            LimpiarTextBox(gbResponsabilidad);
-            TextBoxNoEditables(gbResponsabilidad);
-            LimpiarTextBox(gbPersonas);
-            TextBoxNoEditables(gbPersonas);
-            LimpiarTextBox(gbPuntos);
-            TextBoxNoEditables(gbPuntos);
-            lblIDPersona.Text = "";
-            lblIDPunto.Text = "";
-            btnAtrasResp.Visible = false;
-            btnGuardarResp.Visible = false;
-            btnModificarResp.Visible = false;
+            LimpiarGB();
         }
 
         private void BtnBuscarPunto_Click(object sender, EventArgs e)
         {
-            nuevo = true;
             tabla = "Puntos";
-            //TODO buscar
             try
             {
                 CLBuscar cLBuscar = new CLBuscar
@@ -305,11 +317,11 @@ namespace Vista.ControlesDeUsuario
                 };
                 dgvDatos.Visible = true;
                 lblMensajeTop.Text = "Doble click para Seleccionar";
-                dgvDatos.DataSource = cLBuscar.Punto();
+                dgvDatos.DataSource = cLBuscar.Puntos();
             }
-            catch (Exception error)
+            catch (Exception ex)
             {
-                MessageBox.Show("NO FUE POSIBLE REALIZAR LA ACCIÓN\n\n" + error.ToString(), "Vuelva a intentarlo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(fallo + ex.ToString());
             }
         }
 
@@ -327,122 +339,170 @@ namespace Vista.ControlesDeUsuario
                 };
                 dgvDatos.Visible = true;
                 lblMensajeTop.Text = "Doble click para Seleccionar";
-                dgvDatos.DataSource = cLBuscar.Persona();
+                dgvDatos.DataSource = cLBuscar.Personas();
             }
-            catch (Exception error)
+            catch (Exception ex)
             {
-                MessageBox.Show("NO FUE POSIBLE REALIZAR LA ACCIÓN\n\n" + error.ToString(), "Vuelva a intentarlo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(fallo + ex);
+            }
+        }
+
+        private void BtnEliminarPunto_Click(object sender, EventArgs e)
+        {
+            DialogResult resultado = MessageBox.Show("Se eliminará el registro de forma permanente", "ATENCION", MessageBoxButtons.OKCancel,MessageBoxIcon.Warning);
+            if( resultado == DialogResult.OK)
+            {
+                try
+                {
+                    CLEliminar cLEliminar = new CLEliminar
+                    {
+                        IDPunto = lblIDPunto.Text
+                    };
+                    //dgvDatos.Visible = true;
+                    if (cLEliminar.Puntos())
+                    {
+                        MessageBox.Show(exito);
+                        dgvDatos.DataSource = new CLBuscar().Puntos();
+                        LimpiarGB();
+                    }
+                    else MessageBox.Show("Verifique los datos ingresados e inténtelo nuevamente", "ALGO FALLÓ");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(fallo + ex.ToString());
+                }
+            }
+            
+        }
+
+        private void BtnEliminarPersona_Click(object sender, EventArgs e)
+        {
+            DialogResult resultado = MessageBox.Show("Se eliminará el registro de forma permanente", "ATENCION", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            if (resultado == DialogResult.OK)
+            {
+                try
+                {
+                    CLEliminar cLEliminar = new CLEliminar
+                    {
+                        IDPersona = lblIDPersona.Text
+                    };
+                    // dgvDatos.Visible = true;
+                    if (cLEliminar.Personas())
+                    {
+                        MessageBox.Show(exito);
+                        dgvDatos.DataSource = new CLBuscar().Personas();
+                        LimpiarGB();
+                    }
+                    else MessageBox.Show("Verifique los datos ingresados e inténtelo nuevamente", "ALGO FALLÓ");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(fallo + ex.ToString());
+                }
+            }
+        }
+
+        private void BtnEliminarResp_Click(object sender, EventArgs e)
+        {
+            DialogResult resultado = MessageBox.Show("Se eliminará el registro de forma permanente", "ATENCION", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            if (resultado == DialogResult.OK)
+            {
+                try
+                {
+                    CLEliminar cLEliminar = new CLEliminar
+                    {
+                        IDPunto = lblIDPunto.Text,
+                        IDPersona = lblIDPersona.Text
+                    };
+                    //dgvDatos.Visible = true;
+                    if (cLEliminar.Responsabilidades())
+                    {
+                        MessageBox.Show(exito);
+                        dgvDatos.DataSource = new CLBuscar().Responsabilidades();
+                        LimpiarGB();
+                    }
+                    else MessageBox.Show("Verifique los datos ingresados e inténtelo nuevamente", "ALGO FALLÓ");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(fallo + ex.ToString());
+                }
             }
         }
 
         #endregion
 
         #region EVENTOS
-        private void UcPuntoReciclado_Load(object sender, EventArgs e)
-        {
-            //EstadoLoad();
-        }
         private void DgvDatos_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            btnAtrasResp.PerformClick();
-            PasarDgvATextBox(tabla);
-            if (!nuevo)
+            try
             {
-                if (tabla == "PersonaPunto")
+                if(!nuevo) LimpiarGB();
+                PasarDgvATextBox(tabla);
+                if (!nuevo)
                 {
-                    btnModificarResp.Visible = true;
-                    btnAtrasResp.Visible = true;
-                }
-                if (tabla == "Personas")
-                {
-                    btnModificarPersona.Visible = true;
-                    btnAtrasPersona.Visible = true; ;
-                }
-                if (tabla == "Puntos")
-                {
-                    btnModificarPunto.Visible = true;
-                    btnAtrasPunto.Visible = true;
+                    if (tabla == "Responsabilidades")
+                    {
+                        btnModificarResp.Visible = true;
+                        btnAtrasResp.Visible = true;
+                        btnEliminarResp.Visible = true;
+                    }
+                    if (tabla == "Personas")
+                    {
+                        btnModificarPersona.Visible = true;
+                        btnAtrasPersona.Visible = true;
+                        btnEliminarPersona.Visible = true;
+                    }
+                    if (tabla == "Puntos")
+                    {
+                        btnModificarPunto.Visible = true;
+                        btnAtrasPunto.Visible = true;
+                        btnEliminarPunto.Visible = true;
+                    }
                 }
             }
-            
+            catch (Exception ex)
+            {
+                MessageBox.Show(fallo + ex);
+            }
             
         }
         #endregion
 
         #region METODOS
-        private void EstadoLoad()
-        {
-            this.btnCerrar.Focus();
-            
-            btnBuscarPersona.Visible = false;
-            btnBuscarPunto.Visible = false;
-            txtBuscarPersona.Visible = false;
-            txtBuscarPunto.Visible = false;
-            btnGuardarPersona.Visible = false;
-            btnGuardarPunto.Visible = false;
-            btnGuardarResp.Visible = false;
-            btnModificarPersona.Visible = true;
-            btnModificarPunto.Visible = true;
-            btnModificarResp.Visible = true;
-            btnEliminarPersona.Visible = true;
-            btnEliminarPunto.Visible = true;
-            btnEliminarResp.Visible = true;
-            TextBoxNoEditables(gbPersonas);
-            TextBoxNoEditables(gbPuntos);
-            TextBoxNoEditables(gbResponsabilidad);
-            LimpiarTextBox(gbPersonas);
-            LimpiarTextBox(gbPuntos);
-            LimpiarTextBox(gbResponsabilidad);
-            lblIDPersona.Text = string.Empty;
-            lblIDPunto.Text = string.Empty;
-
-        }
 
         private void PasarDgvATextBox(string tipo)
         {
-            if (tipo == "PersonaPunto")
+            if (tipo == "Responsabilidades")
             {
                 lblIDPunto.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["idPunto"].Value.ToString();
-                txtDenominacion.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["denominacion"].Value.ToString();
-                txtDiasYHorarios.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["DiasYHorarios"].Value.ToString();
-                txtEspacio.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["espacio"].Value.ToString();
-                txtDireccion.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["direccion"].Value.ToString();
+                txtDenominacion.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["DENOMINACION"].Value.ToString();
+                txtDiasYHorarios.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["DIASYHORARIOS"].Value.ToString();
+                txtEspacio.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["ESPACIO"].Value.ToString();
+                txtDireccion.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["DIRECCION"].Value.ToString();
                 lblIDPersona.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["idPersona"].Value.ToString();
-                txtNombre.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["nombre"].Value.ToString();
-                txtApellido.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["apellido"].Value.ToString();
+                txtNombre.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["NOMBRE"].Value.ToString();
+                txtApellido.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["APELLIDO"].Value.ToString();
                 txtDNI.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["DNI"].Value.ToString();
-                txtTelefono.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["Telefono"].Value.ToString();
-                txtResponsabilidad.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["responsabilidad"].Value.ToString();
+                txtTelefono.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["TELEFONO"].Value.ToString();
+                txtResponsabilidad.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["RESPONSABILIDAD"].Value.ToString();
 
             }
             if (tipo == "Personas")
             {
                 lblIDPersona.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["idPersona"].Value.ToString();
-                txtNombre.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["nombre"].Value.ToString();
-                txtApellido.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["apellido"].Value.ToString();
+                txtNombre.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["NOMBRE"].Value.ToString();
+                txtApellido.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["APELLIDO"].Value.ToString();
                 txtDNI.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["DNI"].Value.ToString();
-                txtTelefono.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["Telefono"].Value.ToString();
+                txtTelefono.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["TELEFONO"].Value.ToString();
             }
             if (tipo == "Puntos")
             {
                 lblIDPunto.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["idPunto"].Value.ToString();
-                txtDenominacion.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["denominacion"].Value.ToString();
-                txtDiasYHorarios.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["DiasYHorarios"].Value.ToString();
-                txtEspacio.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["espacio"].Value.ToString();
-                txtDireccion.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["direccion"].Value.ToString();
-            }
-        }
-
-        private void TextBoxNoEditables(GroupBox gb)
-        {
-            foreach (Control control in gb.Controls)
-            {
-                if (control is TextBox)
-                {
-                    TextBox t = control as TextBox;
-                    t.ReadOnly = true;
-                    t.BackColor = System.Drawing.Color.Pink;
-                }
+                txtDenominacion.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["DENOMINACION"].Value.ToString();
+                txtDiasYHorarios.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["DIASYHORARIOS"].Value.ToString();
+                txtEspacio.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["ESPACIO"].Value.ToString();
+                txtDireccion.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["DIRECCION"].Value.ToString();
             }
         }
 
@@ -462,8 +522,9 @@ namespace Vista.ControlesDeUsuario
         private void OpcionesDgv()
         {
             dgvDatos.Visible = true;
+
             dgvDatos.BringToFront();
-            dgvDatos.RowHeadersVisible = false; // elimina la primera columna
+            dgvDatos.RowHeadersVisible = false; // no muestra la primera columna
             dgvDatos.SelectionMode = DataGridViewSelectionMode.FullRowSelect; //Selecciona toda la fila
             dgvDatos.ReadOnly = true; //hace que la grilla no se pueda editar
             dgvDatos.RowsDefaultCellStyle.BackColor = System.Drawing.Color.LavenderBlush;//alterna colores de las filas
@@ -488,14 +549,36 @@ namespace Vista.ControlesDeUsuario
             return verificar;
         }
 
-        private void LimpiarTextBox(GroupBox gb)
-        {
-            foreach (Control control in gb.Controls)
+        private void LimpiarGB()
+        {          
+            foreach (GroupBox gb in flpTablas.Controls)
             {
-                if (control is TextBox)
+                foreach (Control control in gb.Controls)
                 {
-                    TextBox t = control as TextBox;
-                    t.Text = string.Empty;
+                    if (control is TextBox)
+                    {
+                        TextBox t = control as TextBox;
+                        t.Text = string.Empty;
+                        t.ReadOnly = true;
+                        t.BackColor = System.Drawing.Color.Pink;
+                    }
+                    if (control is Label)
+                    {
+                        Label l = control as Label;
+                        if (l.BackColor == System.Drawing.Color.Pink) l.Text = string.Empty;
+                    }
+                    if (control is FlowLayoutPanel)
+                    {
+                        FlowLayoutPanel f = control as FlowLayoutPanel;
+                        foreach (Control control2 in f.Controls)
+                        {
+                            if (control2 is Button)
+                            {
+                                Button b = control2 as Button;
+                                b.Visible = false;
+                            }
+                        }
+                    }
                 }
             }
         }

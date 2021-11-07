@@ -14,23 +14,27 @@ namespace Datos
         public string Espacio { private get; set; }
         public string Direccion { private get; set; }
         public string Responsabilidad { private get; set; }
-        public bool PersonaPunto()
+
+        public bool Responsabilidades()
         {
-            string sentencia = $"UPDATE PersonaPunto SET responsabilidad = '{Responsabilidad}' WHERE idPersona= {IDPersona} AND idPunto= {IDPunto};";
+            string sentencia = $"UPDATE Responsabilidades SET RESPONSABILIDAD = '{Responsabilidad}' WHERE  idPersona= {IDPersona}" +
+                $"AND idPunto= {IDPunto};";
             if (new CDEjecutarNonQuery().NonQuery(sentencia) == 1) return true;
             else return false;
         }
+
         public bool Personas()
         {
-            string sentencia = $"UPDATE Personas SET nombre = '{Nombre}', apellido = '{Apellido}', DNI = '{DNI}', Telefono = '{Telefono}' " +
+            string sentencia = $"UPDATE Personas SET NOMBRE = '{Nombre}', APELLIDO = '{Apellido}', DNI = '{DNI}', TELEFONO = '{Telefono}' " +
                 $"WHERE idPersona= {IDPersona};";
             if (new CDEjecutarNonQuery().NonQuery(sentencia) == 1) return true;
             else return false;
         }
-        public bool PuntoReciclado()
+
+        public bool Puntos()
         {
-            string sentencia = $"UPDATE PuntoReciclado SET denominacion = '{Denominacion}', DiasYHorarios = '{DiasYHorarios}', espacio= '{Espacio}'," +
-                $" direccion = '{Direccion}' WHERE idPunto= {IDPunto};";
+            string sentencia = $"UPDATE Puntos SET DENOMINACION = '{Denominacion}', DIASYHORARIOS = '{DiasYHorarios}', ESPACIO= '{Espacio}'," +
+                $" DIRECCION = '{Direccion}' WHERE idPunto= {IDPunto};";
             if (new CDEjecutarNonQuery().NonQuery(sentencia) == 1) return true;
             else return false;
         }

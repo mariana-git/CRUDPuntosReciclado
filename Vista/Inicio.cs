@@ -45,11 +45,11 @@ namespace Vista
 
         }
 
-        private void BtnCPersonaPunto_Click(object sender, EventArgs e)
+        private void BtnCResponsabilidades_Click(object sender, EventArgs e)
         {
             panelBtnConsultar.Visible = false;
             panelPrincipal.Visible = true;
-            AbrirUC(new ControlesDeUsuario.UcPuntoReciclado("PersonaPunto",txtBuscar.Text));
+            AbrirUC(new ControlesDeUsuario.UcPuntoReciclado("Responsabilidades", txtBuscar.Text));
             txtBuscar.Text = "";
         }
 
@@ -69,11 +69,11 @@ namespace Vista
             txtBuscar.Text = "";
         }
 
-        private void BtnNPersonaPunto_Click(object sender, EventArgs e)
+        private void BtnNResponsabilidades_Click(object sender, EventArgs e)
         {
             panelBtnNuevo.Visible = false;
             panelPrincipal.Visible = true;
-            AbrirUC(new ControlesDeUsuario.UcPuntoReciclado("PersonaPunto"));
+            AbrirUC(new ControlesDeUsuario.UcPuntoReciclado("Responsabilidades"));
         }
 
         private void BtnNPersona_Click(object sender, EventArgs e)

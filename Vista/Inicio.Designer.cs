@@ -42,11 +42,11 @@ namespace Vista
             this.panelBtnConsultar = new System.Windows.Forms.Panel();
             this.btnCPunto = new System.Windows.Forms.Button();
             this.btnCPersonas = new System.Windows.Forms.Button();
-            this.btnCPersonaPunto = new System.Windows.Forms.Button();
+            this.btnCResponsabilidades = new System.Windows.Forms.Button();
             this.panelBtnNuevo = new System.Windows.Forms.Panel();
             this.btnNPunto = new System.Windows.Forms.Button();
             this.btnNPersona = new System.Windows.Forms.Button();
-            this.btnNPersonaPunto = new System.Windows.Forms.Button();
+            this.btnNResponsabilidades = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.flpBotones.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -62,9 +62,10 @@ namespace Vista
             this.txtBuscar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtBuscar.BackColor = System.Drawing.Color.Aquamarine;
             this.txtBuscar.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscar.Location = new System.Drawing.Point(4, 28);
+            this.txtBuscar.Location = new System.Drawing.Point(-1, 28);
+            this.txtBuscar.Margin = new System.Windows.Forms.Padding(0);
             this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.Size = new System.Drawing.Size(115, 27);
+            this.txtBuscar.Size = new System.Drawing.Size(122, 27);
             this.txtBuscar.TabIndex = 18;
             this.txtBuscar.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -73,9 +74,9 @@ namespace Vista
             this.panelPrincipal.AllowDrop = true;
             this.panelPrincipal.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panelPrincipal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(35)))), ((int)(((byte)(90)))));
-            this.panelPrincipal.Location = new System.Drawing.Point(158, 187);
+            this.panelPrincipal.Location = new System.Drawing.Point(145, 171);
             this.panelPrincipal.Name = "panelPrincipal";
-            this.panelPrincipal.Size = new System.Drawing.Size(1087, 620);
+            this.panelPrincipal.Size = new System.Drawing.Size(1009, 620);
             this.panelPrincipal.TabIndex = 17;
             // 
             // btnConsultar
@@ -126,7 +127,7 @@ namespace Vista
             this.flpBotones.Location = new System.Drawing.Point(0, 0);
             this.flpBotones.Name = "flpBotones";
             this.flpBotones.Padding = new System.Windows.Forms.Padding(5);
-            this.flpBotones.Size = new System.Drawing.Size(139, 832);
+            this.flpBotones.Size = new System.Drawing.Size(139, 814);
             this.flpBotones.TabIndex = 19;
             // 
             // pictureBox1
@@ -179,7 +180,7 @@ namespace Vista
             // 
             this.panelBtnConsultar.Controls.Add(this.btnCPunto);
             this.panelBtnConsultar.Controls.Add(this.btnCPersonas);
-            this.panelBtnConsultar.Controls.Add(this.btnCPersonaPunto);
+            this.panelBtnConsultar.Controls.Add(this.btnCResponsabilidades);
             this.panelBtnConsultar.Location = new System.Drawing.Point(8, 333);
             this.panelBtnConsultar.Name = "panelBtnConsultar";
             this.panelBtnConsultar.Size = new System.Drawing.Size(122, 180);
@@ -221,28 +222,28 @@ namespace Vista
             this.btnCPersonas.UseVisualStyleBackColor = false;
             this.btnCPersonas.Click += new System.EventHandler(this.BtnCPersonas_Click);
             // 
-            // btnCPersonaPunto
+            // btnCResponsabilidades
             // 
-            this.btnCPersonaPunto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(62)))), ((int)(((byte)(139)))));
-            this.btnCPersonaPunto.FlatAppearance.BorderColor = System.Drawing.Color.Aquamarine;
-            this.btnCPersonaPunto.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Aquamarine;
-            this.btnCPersonaPunto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCPersonaPunto.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCPersonaPunto.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnCPersonaPunto.Location = new System.Drawing.Point(2, 3);
-            this.btnCPersonaPunto.Name = "btnCPersonaPunto";
-            this.btnCPersonaPunto.Size = new System.Drawing.Size(118, 55);
-            this.btnCPersonaPunto.TabIndex = 2;
-            this.btnCPersonaPunto.Text = "Responsables Por Punto";
-            this.btnCPersonaPunto.UseVisualStyleBackColor = false;
-            this.btnCPersonaPunto.Click += new System.EventHandler(this.BtnCPersonaPunto_Click);
+            this.btnCResponsabilidades.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(62)))), ((int)(((byte)(139)))));
+            this.btnCResponsabilidades.FlatAppearance.BorderColor = System.Drawing.Color.Aquamarine;
+            this.btnCResponsabilidades.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Aquamarine;
+            this.btnCResponsabilidades.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCResponsabilidades.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCResponsabilidades.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnCResponsabilidades.Location = new System.Drawing.Point(2, 3);
+            this.btnCResponsabilidades.Name = "btnCResponsabilidades";
+            this.btnCResponsabilidades.Size = new System.Drawing.Size(118, 55);
+            this.btnCResponsabilidades.TabIndex = 2;
+            this.btnCResponsabilidades.Text = "Responsables Por Punto";
+            this.btnCResponsabilidades.UseVisualStyleBackColor = false;
+            this.btnCResponsabilidades.Click += new System.EventHandler(this.BtnCResponsabilidades_Click);
             // 
             // panelBtnNuevo
             // 
             this.panelBtnNuevo.Controls.Add(this.btnNPunto);
             this.panelBtnNuevo.Controls.Add(this.btnNPersona);
-            this.panelBtnNuevo.Controls.Add(this.btnNPersonaPunto);
-            this.panelBtnNuevo.Location = new System.Drawing.Point(8, 640);
+            this.panelBtnNuevo.Controls.Add(this.btnNResponsabilidades);
+            this.panelBtnNuevo.Location = new System.Drawing.Point(138, 8);
             this.panelBtnNuevo.Name = "panelBtnNuevo";
             this.panelBtnNuevo.Size = new System.Drawing.Size(122, 180);
             this.panelBtnNuevo.TabIndex = 20;
@@ -285,22 +286,22 @@ namespace Vista
             this.btnNPersona.UseVisualStyleBackColor = false;
             this.btnNPersona.Click += new System.EventHandler(this.BtnNPersona_Click);
             // 
-            // btnNPersonaPunto
+            // btnNResponsabilidades
             // 
-            this.btnNPersonaPunto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(100)))), ((int)(((byte)(203)))));
-            this.btnNPersonaPunto.FlatAppearance.BorderColor = System.Drawing.Color.Aquamarine;
-            this.btnNPersonaPunto.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Aquamarine;
-            this.btnNPersonaPunto.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(115)))), ((int)(((byte)(208)))));
-            this.btnNPersonaPunto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNPersonaPunto.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
-            this.btnNPersonaPunto.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnNPersonaPunto.Location = new System.Drawing.Point(2, 3);
-            this.btnNPersonaPunto.Name = "btnNPersonaPunto";
-            this.btnNPersonaPunto.Size = new System.Drawing.Size(118, 55);
-            this.btnNPersonaPunto.TabIndex = 2;
-            this.btnNPersonaPunto.Text = "Responsables Por Punto";
-            this.btnNPersonaPunto.UseVisualStyleBackColor = false;
-            this.btnNPersonaPunto.Click += new System.EventHandler(this.BtnNPersonaPunto_Click);
+            this.btnNResponsabilidades.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(100)))), ((int)(((byte)(203)))));
+            this.btnNResponsabilidades.FlatAppearance.BorderColor = System.Drawing.Color.Aquamarine;
+            this.btnNResponsabilidades.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Aquamarine;
+            this.btnNResponsabilidades.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(115)))), ((int)(((byte)(208)))));
+            this.btnNResponsabilidades.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNResponsabilidades.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+            this.btnNResponsabilidades.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnNResponsabilidades.Location = new System.Drawing.Point(2, 3);
+            this.btnNResponsabilidades.Name = "btnNResponsabilidades";
+            this.btnNResponsabilidades.Size = new System.Drawing.Size(118, 55);
+            this.btnNResponsabilidades.TabIndex = 2;
+            this.btnNResponsabilidades.Text = "Responsables Por Punto";
+            this.btnNResponsabilidades.UseVisualStyleBackColor = false;
+            this.btnNResponsabilidades.Click += new System.EventHandler(this.BtnNResponsabilidades_Click);
             // 
             // pictureBox2
             // 
@@ -308,10 +309,10 @@ namespace Vista
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(155, 10);
+            this.pictureBox2.Location = new System.Drawing.Point(145, 10);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(1090, 159);
+            this.pictureBox2.Size = new System.Drawing.Size(1009, 159);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 20;
             this.pictureBox2.TabStop = false;
@@ -324,7 +325,7 @@ namespace Vista
             this.AutoScrollMinSize = new System.Drawing.Size(2, 2);
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(35)))), ((int)(((byte)(90)))));
-            this.ClientSize = new System.Drawing.Size(1273, 832);
+            this.ClientSize = new System.Drawing.Size(1179, 814);
             this.Controls.Add(this.flpBotones);
             this.Controls.Add(this.panelPrincipal);
             this.Controls.Add(this.pictureBox2);
@@ -360,11 +361,11 @@ namespace Vista
         private System.Windows.Forms.Panel panelBtnConsultar;
         private System.Windows.Forms.Button btnCPunto;
         private System.Windows.Forms.Button btnCPersonas;
-        private System.Windows.Forms.Button btnCPersonaPunto;
+        private System.Windows.Forms.Button btnCResponsabilidades;
         private System.Windows.Forms.Panel panelBtnNuevo;
         private System.Windows.Forms.Button btnNPunto;
         private System.Windows.Forms.Button btnNPersona;
-        private System.Windows.Forms.Button btnNPersonaPunto;
+        private System.Windows.Forms.Button btnNResponsabilidades;
     }
 }
 

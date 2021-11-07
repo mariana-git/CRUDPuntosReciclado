@@ -1,15 +1,7 @@
-﻿using System.Data;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.OleDb;
-
-namespace Datos
+﻿namespace Datos
 {
     public class CDInsertar
     {
-
         public int IDPersona { private get; set; }
         public int IDPunto { private get; set; }
         public string Telefono { private get; set; }
@@ -25,20 +17,22 @@ namespace Datos
 
         public bool Personas()
         {
-            string sentencia = $"INSERT INTO Personas (nombre, apellido, DNI, Telefono) VALUES ('{Nombre}', '{Apellido}', '{DNI}', '{Telefono}');";
+            string sentencia = $"INSERT INTO Personas (NOMBRE, APELLIDO, DNI, TELEFONO) VALUES ('{Nombre}', '{Apellido}', '{DNI}', '{Telefono}');";
             if (new CDEjecutarNonQuery().NonQuery(sentencia) == 1) return true;
             else return false;
         }
-        public bool PuntoReciclado()
+
+        public bool Puntos()
         {
-            string sentencia = $"INSERT INTO PuntoReciclado (denominacion, DiasYHorarios, espacio, direccion) VALUES ('{Denominacion}', '{DiasYHorarios}', '{Espacio}', '{Direccion}');";
+            string sentencia = $"INSERT INTO Puntos (DENOMINACION, DIASYHORARIOS, ESPACIO, DIRECCION) VALUES ('{Denominacion}', '{DiasYHorarios}', '{Espacio}', '{Direccion}');";
 
             if (new CDEjecutarNonQuery().NonQuery(sentencia) == 1) return true;
             else return false;
         }
-        public bool PersonaPunto()
+
+        public bool Responsabilidades()
         {
-            string sentencia = $"INSERT INTO PersonaPunto VALUES ({IDPersona}, {IDPunto}, '{Responsabilidad}');";
+            string sentencia = $"INSERT INTO Responsabilidades (idPersona,idPunto, RESPONSABILIDAD) VALUES ({IDPersona}, {IDPunto}, '{Responsabilidad}');";
 
             if (new CDEjecutarNonQuery().NonQuery(sentencia)==1) return true;
             else return false;

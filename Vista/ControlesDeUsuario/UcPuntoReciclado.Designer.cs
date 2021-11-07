@@ -30,7 +30,7 @@ namespace Vista.ControlesDeUsuario
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UcPuntoReciclado));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCerrar = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -102,7 +102,7 @@ namespace Vista.ControlesDeUsuario
             this.btnCerrar.ForeColor = System.Drawing.Color.SandyBrown;
             this.btnCerrar.Location = new System.Drawing.Point(0, 587);
             this.btnCerrar.Name = "btnCerrar";
-            this.btnCerrar.Size = new System.Drawing.Size(1087, 33);
+            this.btnCerrar.Size = new System.Drawing.Size(1009, 33);
             this.btnCerrar.TabIndex = 5;
             this.btnCerrar.Text = "Cerrar";
             this.btnCerrar.UseVisualStyleBackColor = false;
@@ -113,7 +113,7 @@ namespace Vista.ControlesDeUsuario
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label2.Location = new System.Drawing.Point(13, 110);
+            this.label2.Location = new System.Drawing.Point(6, 110);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(108, 18);
             this.label2.TabIndex = 7;
@@ -124,7 +124,7 @@ namespace Vista.ControlesDeUsuario
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.Location = new System.Drawing.Point(22, 235);
+            this.label1.Location = new System.Drawing.Point(16, 235);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 18);
             this.label1.TabIndex = 8;
@@ -135,7 +135,7 @@ namespace Vista.ControlesDeUsuario
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label3.Location = new System.Drawing.Point(22, 155);
+            this.label3.Location = new System.Drawing.Point(16, 155);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 18);
             this.label3.TabIndex = 9;
@@ -146,7 +146,7 @@ namespace Vista.ControlesDeUsuario
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label4.Location = new System.Drawing.Point(22, 115);
+            this.label4.Location = new System.Drawing.Point(16, 115);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(66, 18);
             this.label4.TabIndex = 10;
@@ -157,7 +157,7 @@ namespace Vista.ControlesDeUsuario
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label6.Location = new System.Drawing.Point(13, 235);
+            this.label6.Location = new System.Drawing.Point(6, 235);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(75, 18);
             this.label6.TabIndex = 12;
@@ -168,7 +168,7 @@ namespace Vista.ControlesDeUsuario
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label7.Location = new System.Drawing.Point(13, 191);
+            this.label7.Location = new System.Drawing.Point(6, 191);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(66, 18);
             this.label7.TabIndex = 13;
@@ -179,7 +179,7 @@ namespace Vista.ControlesDeUsuario
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label8.Location = new System.Drawing.Point(13, 150);
+            this.label8.Location = new System.Drawing.Point(6, 150);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(78, 18);
             this.label8.TabIndex = 14;
@@ -204,7 +204,7 @@ namespace Vista.ControlesDeUsuario
             this.gbPuntos.ForeColor = System.Drawing.Color.Aqua;
             this.gbPuntos.Location = new System.Drawing.Point(3, 3);
             this.gbPuntos.Name = "gbPuntos";
-            this.gbPuntos.Size = new System.Drawing.Size(353, 273);
+            this.gbPuntos.Size = new System.Drawing.Size(331, 273);
             this.gbPuntos.TabIndex = 15;
             this.gbPuntos.TabStop = false;
             this.gbPuntos.Text = "Punto de Reciclado";
@@ -218,7 +218,7 @@ namespace Vista.ControlesDeUsuario
             this.flpPuntos.Controls.Add(this.btnModificarPunto);
             this.flpPuntos.Controls.Add(this.btnAtrasPunto);
             this.flpPuntos.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flpPuntos.Location = new System.Drawing.Point(10, 22);
+            this.flpPuntos.Location = new System.Drawing.Point(3, 22);
             this.flpPuntos.Name = "flpPuntos";
             this.flpPuntos.Size = new System.Drawing.Size(312, 29);
             this.flpPuntos.TabIndex = 27;
@@ -271,6 +271,7 @@ namespace Vista.ControlesDeUsuario
             this.btnEliminarPunto.TabIndex = 29;
             this.btnEliminarPunto.UseVisualStyleBackColor = false;
             this.btnEliminarPunto.Visible = false;
+            this.btnEliminarPunto.Click += new System.EventHandler(this.BtnEliminarPunto_Click);
             // 
             // btnGuardarPunto
             // 
@@ -337,7 +338,7 @@ namespace Vista.ControlesDeUsuario
             this.lblIDPunto.BackColor = System.Drawing.Color.Pink;
             this.lblIDPunto.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.lblIDPunto.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.lblIDPunto.Location = new System.Drawing.Point(123, 69);
+            this.lblIDPunto.Location = new System.Drawing.Point(116, 69);
             this.lblIDPunto.Name = "lblIDPunto";
             this.lblIDPunto.Size = new System.Drawing.Size(201, 23);
             this.lblIDPunto.TabIndex = 26;
@@ -348,7 +349,7 @@ namespace Vista.ControlesDeUsuario
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label10.Location = new System.Drawing.Point(13, 72);
+            this.label10.Location = new System.Drawing.Point(6, 72);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(91, 18);
             this.label10.TabIndex = 25;
@@ -356,7 +357,7 @@ namespace Vista.ControlesDeUsuario
             // 
             // txtDireccion
             // 
-            this.txtDireccion.Location = new System.Drawing.Point(123, 232);
+            this.txtDireccion.Location = new System.Drawing.Point(116, 232);
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(201, 23);
             this.txtDireccion.TabIndex = 18;
@@ -364,7 +365,7 @@ namespace Vista.ControlesDeUsuario
             // 
             // txtEspacio
             // 
-            this.txtEspacio.Location = new System.Drawing.Point(123, 189);
+            this.txtEspacio.Location = new System.Drawing.Point(116, 189);
             this.txtEspacio.Name = "txtEspacio";
             this.txtEspacio.Size = new System.Drawing.Size(201, 23);
             this.txtEspacio.TabIndex = 17;
@@ -372,7 +373,7 @@ namespace Vista.ControlesDeUsuario
             // 
             // txtDiasYHorarios
             // 
-            this.txtDiasYHorarios.Location = new System.Drawing.Point(123, 148);
+            this.txtDiasYHorarios.Location = new System.Drawing.Point(116, 148);
             this.txtDiasYHorarios.Name = "txtDiasYHorarios";
             this.txtDiasYHorarios.Size = new System.Drawing.Size(201, 23);
             this.txtDiasYHorarios.TabIndex = 16;
@@ -380,7 +381,7 @@ namespace Vista.ControlesDeUsuario
             // 
             // txtDenominacion
             // 
-            this.txtDenominacion.Location = new System.Drawing.Point(123, 108);
+            this.txtDenominacion.Location = new System.Drawing.Point(116, 108);
             this.txtDenominacion.Name = "txtDenominacion";
             this.txtDenominacion.Size = new System.Drawing.Size(201, 23);
             this.txtDenominacion.TabIndex = 15;
@@ -404,9 +405,9 @@ namespace Vista.ControlesDeUsuario
             this.gbPersonas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gbPersonas.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.gbPersonas.ForeColor = System.Drawing.Color.Aqua;
-            this.gbPersonas.Location = new System.Drawing.Point(362, 3);
+            this.gbPersonas.Location = new System.Drawing.Point(340, 3);
             this.gbPersonas.Name = "gbPersonas";
-            this.gbPersonas.Size = new System.Drawing.Size(353, 273);
+            this.gbPersonas.Size = new System.Drawing.Size(329, 273);
             this.gbPersonas.TabIndex = 19;
             this.gbPersonas.TabStop = false;
             this.gbPersonas.Text = "Persona";
@@ -416,7 +417,7 @@ namespace Vista.ControlesDeUsuario
             this.lblIDPersona.BackColor = System.Drawing.Color.Pink;
             this.lblIDPersona.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.lblIDPersona.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.lblIDPersona.Location = new System.Drawing.Point(120, 69);
+            this.lblIDPersona.Location = new System.Drawing.Point(114, 69);
             this.lblIDPersona.Name = "lblIDPersona";
             this.lblIDPersona.Size = new System.Drawing.Size(201, 23);
             this.lblIDPersona.TabIndex = 27;
@@ -427,7 +428,7 @@ namespace Vista.ControlesDeUsuario
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label11.Location = new System.Drawing.Point(23, 74);
+            this.label11.Location = new System.Drawing.Point(17, 74);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(91, 18);
             this.label11.TabIndex = 27;
@@ -435,7 +436,7 @@ namespace Vista.ControlesDeUsuario
             // 
             // txtDNI
             // 
-            this.txtDNI.Location = new System.Drawing.Point(119, 189);
+            this.txtDNI.Location = new System.Drawing.Point(113, 189);
             this.txtDNI.Name = "txtDNI";
             this.txtDNI.Size = new System.Drawing.Size(201, 23);
             this.txtDNI.TabIndex = 19;
@@ -446,7 +447,7 @@ namespace Vista.ControlesDeUsuario
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label5.Location = new System.Drawing.Point(23, 195);
+            this.label5.Location = new System.Drawing.Point(17, 195);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(37, 18);
             this.label5.TabIndex = 18;
@@ -461,7 +462,7 @@ namespace Vista.ControlesDeUsuario
             this.flpPersonas.Controls.Add(this.btnModificarPersona);
             this.flpPersonas.Controls.Add(this.btnAtrasPersona);
             this.flpPersonas.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flpPersonas.Location = new System.Drawing.Point(11, 22);
+            this.flpPersonas.Location = new System.Drawing.Point(5, 22);
             this.flpPersonas.Name = "flpPersonas";
             this.flpPersonas.Size = new System.Drawing.Size(312, 29);
             this.flpPersonas.TabIndex = 30;
@@ -514,6 +515,7 @@ namespace Vista.ControlesDeUsuario
             this.btnEliminarPersona.TabIndex = 29;
             this.btnEliminarPersona.UseVisualStyleBackColor = false;
             this.btnEliminarPersona.Visible = false;
+            this.btnEliminarPersona.Click += new System.EventHandler(this.BtnEliminarPersona_Click);
             // 
             // btnGuardarPersona
             // 
@@ -577,7 +579,7 @@ namespace Vista.ControlesDeUsuario
             // 
             // txtTelefono
             // 
-            this.txtTelefono.Location = new System.Drawing.Point(119, 232);
+            this.txtTelefono.Location = new System.Drawing.Point(113, 232);
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(201, 23);
             this.txtTelefono.TabIndex = 17;
@@ -585,7 +587,7 @@ namespace Vista.ControlesDeUsuario
             // 
             // txtApellido
             // 
-            this.txtApellido.Location = new System.Drawing.Point(119, 148);
+            this.txtApellido.Location = new System.Drawing.Point(113, 148);
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(201, 23);
             this.txtApellido.TabIndex = 16;
@@ -593,7 +595,7 @@ namespace Vista.ControlesDeUsuario
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(119, 108);
+            this.txtNombre.Location = new System.Drawing.Point(113, 108);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(201, 23);
             this.txtNombre.TabIndex = 15;
@@ -607,21 +609,21 @@ namespace Vista.ControlesDeUsuario
             this.dgvDatos.AllowUserToResizeRows = false;
             this.dgvDatos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvDatos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(9)))), ((int)(((byte)(93)))));
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Plum;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDatos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Plum;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDatos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDatos.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgvDatos.GridColor = System.Drawing.Color.Purple;
             this.dgvDatos.Location = new System.Drawing.Point(3, 39);
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.dgvDatos.Size = new System.Drawing.Size(1081, 247);
+            this.dgvDatos.Size = new System.Drawing.Size(994, 247);
             this.dgvDatos.TabIndex = 20;
             this.dgvDatos.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DgvDatos_CellMouseDoubleClick);
             // 
@@ -635,18 +637,18 @@ namespace Vista.ControlesDeUsuario
             this.gbResponsabilidad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gbResponsabilidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.gbResponsabilidad.ForeColor = System.Drawing.Color.Aqua;
-            this.gbResponsabilidad.Location = new System.Drawing.Point(721, 3);
+            this.gbResponsabilidad.Location = new System.Drawing.Point(675, 3);
             this.gbResponsabilidad.Name = "gbResponsabilidad";
-            this.gbResponsabilidad.Size = new System.Drawing.Size(353, 273);
+            this.gbResponsabilidad.Size = new System.Drawing.Size(313, 273);
             this.gbResponsabilidad.TabIndex = 20;
             this.gbResponsabilidad.TabStop = false;
             this.gbResponsabilidad.Text = "Responsabilidad";
             // 
             // txtResponsabilidad
             // 
-            this.txtResponsabilidad.Location = new System.Drawing.Point(82, 69);
+            this.txtResponsabilidad.Location = new System.Drawing.Point(50, 71);
             this.txtResponsabilidad.Name = "txtResponsabilidad";
-            this.txtResponsabilidad.Size = new System.Drawing.Size(239, 23);
+            this.txtResponsabilidad.Size = new System.Drawing.Size(254, 23);
             this.txtResponsabilidad.TabIndex = 18;
             this.txtResponsabilidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -655,7 +657,7 @@ namespace Vista.ControlesDeUsuario
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label9.Location = new System.Drawing.Point(26, 72);
+            this.label9.Location = new System.Drawing.Point(9, 74);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(35, 18);
             this.label9.TabIndex = 11;
@@ -668,9 +670,9 @@ namespace Vista.ControlesDeUsuario
             this.flpResponsabilidad.Controls.Add(this.btnModificarResp);
             this.flpResponsabilidad.Controls.Add(this.btnAtrasResp);
             this.flpResponsabilidad.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flpResponsabilidad.Location = new System.Drawing.Point(13, 22);
+            this.flpResponsabilidad.Location = new System.Drawing.Point(9, 24);
             this.flpResponsabilidad.Name = "flpResponsabilidad";
-            this.flpResponsabilidad.Size = new System.Drawing.Size(312, 29);
+            this.flpResponsabilidad.Size = new System.Drawing.Size(300, 29);
             this.flpResponsabilidad.TabIndex = 31;
             // 
             // btnEliminarResp
@@ -684,13 +686,14 @@ namespace Vista.ControlesDeUsuario
             this.btnEliminarResp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEliminarResp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEliminarResp.ForeColor = System.Drawing.Color.Lime;
-            this.btnEliminarResp.Location = new System.Drawing.Point(284, 3);
+            this.btnEliminarResp.Location = new System.Drawing.Point(272, 3);
             this.btnEliminarResp.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.btnEliminarResp.Name = "btnEliminarResp";
             this.btnEliminarResp.Size = new System.Drawing.Size(23, 23);
             this.btnEliminarResp.TabIndex = 29;
             this.btnEliminarResp.UseVisualStyleBackColor = false;
             this.btnEliminarResp.Visible = false;
+            this.btnEliminarResp.Click += new System.EventHandler(this.BtnEliminarResp_Click);
             // 
             // btnGuardarResp
             // 
@@ -703,7 +706,7 @@ namespace Vista.ControlesDeUsuario
             this.btnGuardarResp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGuardarResp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGuardarResp.ForeColor = System.Drawing.Color.Lime;
-            this.btnGuardarResp.Location = new System.Drawing.Point(251, 3);
+            this.btnGuardarResp.Location = new System.Drawing.Point(239, 3);
             this.btnGuardarResp.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.btnGuardarResp.Name = "btnGuardarResp";
             this.btnGuardarResp.Size = new System.Drawing.Size(23, 23);
@@ -723,7 +726,7 @@ namespace Vista.ControlesDeUsuario
             this.btnModificarResp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnModificarResp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnModificarResp.ForeColor = System.Drawing.Color.Lime;
-            this.btnModificarResp.Location = new System.Drawing.Point(218, 3);
+            this.btnModificarResp.Location = new System.Drawing.Point(206, 3);
             this.btnModificarResp.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.btnModificarResp.Name = "btnModificarResp";
             this.btnModificarResp.Size = new System.Drawing.Size(23, 23);
@@ -743,7 +746,7 @@ namespace Vista.ControlesDeUsuario
             this.btnAtrasResp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAtrasResp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAtrasResp.ForeColor = System.Drawing.Color.Lime;
-            this.btnAtrasResp.Location = new System.Drawing.Point(185, 3);
+            this.btnAtrasResp.Location = new System.Drawing.Point(173, 3);
             this.btnAtrasResp.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.btnAtrasResp.Name = "btnAtrasResp";
             this.btnAtrasResp.Size = new System.Drawing.Size(23, 23);
@@ -760,7 +763,7 @@ namespace Vista.ControlesDeUsuario
             this.lblMensajeTop.ForeColor = System.Drawing.Color.Magenta;
             this.lblMensajeTop.Location = new System.Drawing.Point(3, 0);
             this.lblMensajeTop.Name = "lblMensajeTop";
-            this.lblMensajeTop.Size = new System.Drawing.Size(1081, 36);
+            this.lblMensajeTop.Size = new System.Drawing.Size(994, 36);
             this.lblMensajeTop.TabIndex = 25;
             this.lblMensajeTop.Text = "label";
             this.lblMensajeTop.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -774,7 +777,7 @@ namespace Vista.ControlesDeUsuario
             this.flpContenedor.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flpContenedor.Location = new System.Drawing.Point(0, 0);
             this.flpContenedor.Name = "flpContenedor";
-            this.flpContenedor.Size = new System.Drawing.Size(1087, 581);
+            this.flpContenedor.Size = new System.Drawing.Size(1009, 581);
             this.flpContenedor.TabIndex = 26;
             // 
             // flpTablas
@@ -784,7 +787,7 @@ namespace Vista.ControlesDeUsuario
             this.flpTablas.Controls.Add(this.gbResponsabilidad);
             this.flpTablas.Location = new System.Drawing.Point(3, 292);
             this.flpTablas.Name = "flpTablas";
-            this.flpTablas.Size = new System.Drawing.Size(1081, 286);
+            this.flpTablas.Size = new System.Drawing.Size(994, 286);
             this.flpTablas.TabIndex = 28;
             // 
             // UcPuntoReciclado
@@ -795,8 +798,7 @@ namespace Vista.ControlesDeUsuario
             this.Controls.Add(this.flpContenedor);
             this.Controls.Add(this.btnCerrar);
             this.Name = "UcPuntoReciclado";
-            this.Size = new System.Drawing.Size(1087, 620);
-            this.Load += new System.EventHandler(this.UcPuntoReciclado_Load);
+            this.Size = new System.Drawing.Size(1009, 620);
             this.gbPuntos.ResumeLayout(false);
             this.gbPuntos.PerformLayout();
             this.flpPuntos.ResumeLayout(false);

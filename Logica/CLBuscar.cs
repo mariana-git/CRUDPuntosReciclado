@@ -1,8 +1,5 @@
 ﻿using System.Data;
 using Datos;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Logica
 {
@@ -10,21 +7,21 @@ namespace Logica
     {        
         public string Palabra { private get; set; }
 
-        public DataTable PersonaPunto ()
+        public DataTable Responsabilidades()
         {
             CDBuscar cDBuscar = new CDBuscar();
             if(Palabra != string.Empty)
             {
                 if (int.TryParse(Palabra, out int numero))
                 {
-                    using (DataTable DT = cDBuscar.PersonaPunto(numero))
+                    using (DataTable DT = cDBuscar.Responsabilidades(numero))
                     {
                         return DT;
                     }
                 }
                 else
                 {
-                    using (DataTable DT = cDBuscar.PersonaPunto(Palabra))
+                    using (DataTable DT = cDBuscar.Responsabilidades(Palabra))
                     {
                         return DT;
                     }
@@ -32,27 +29,28 @@ namespace Logica
             }
             else
             {
-                using (DataTable DT = cDBuscar.PersonaPunto())
+                using (DataTable DT = cDBuscar.Responsabilidades())
                 {
                     return DT;
                 }
             }
         }
-        public DataTable Punto ()
+
+        public DataTable Puntos ()
         {
             CDBuscar cDBuscar = new CDBuscar();
             if (Palabra != string.Empty)
             {
                 if (int.TryParse(Palabra, out int numero))
                 {
-                    using (DataTable DT = cDBuscar.Punto(numero))
+                    using (DataTable DT = cDBuscar.Puntos(numero))
                     {
                         return DT;
                     }
                 }
                 else
                 {
-                    using (DataTable DT = cDBuscar.Punto(Palabra))
+                    using (DataTable DT = cDBuscar.Puntos(Palabra))
                     {
                         return DT;
                     }
@@ -60,27 +58,28 @@ namespace Logica
             }
             else
             {
-                using (DataTable DT = cDBuscar.Punto())
+                using (DataTable DT = cDBuscar.Puntos())
                 {
                     return DT;
                 }
             }
         }
-        public DataTable Persona()
+
+        public DataTable Personas()
         {
             CDBuscar cDBuscar = new CDBuscar();
             if (Palabra != string.Empty)
             {
                 if (int.TryParse(Palabra, out int numero))
                 {
-                    using (DataTable DT = cDBuscar.Persona(numero))
+                    using (DataTable DT = cDBuscar.Personas(numero))
                     {
                         return DT;
                     }
                 }
                 else
                 {
-                    using (DataTable DT = cDBuscar.Persona(Palabra))
+                    using (DataTable DT = cDBuscar.Personas(Palabra))
                     {
                         return DT;
                     }
@@ -88,7 +87,7 @@ namespace Logica
             }
             else
             {
-                using (DataTable DT = cDBuscar.Persona())
+                using (DataTable DT = cDBuscar.Personas())
                 {
                     return DT;
                 }

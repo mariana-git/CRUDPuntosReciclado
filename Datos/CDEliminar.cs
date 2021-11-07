@@ -13,21 +13,24 @@
         public string Espacio { private get; set; }
         public string Direccion { private get; set; }
         public string Responsabilidad { private get; set; }
-        public bool PersonaPunto()
+        
+        public bool Responsabilidades()
         {
-            string sentencia = $"DELETE FROM PersonaPunto WHERE idPersona= {IDPersona} AND idPunto= {IDPunto};";
+            string sentencia = $"DELETE FROM Responsabilidades WHERE idPunto = {IDPunto} AND idPersona ={IDPersona} ;";
             if (new CDEjecutarNonQuery().NonQuery(sentencia) == 1) return true;
             else return false;
         }
+
         public bool Personas()
         {
             string sentencia = $"DELETE FROM Personas WHERE idPersona= {IDPersona};";
             if (new CDEjecutarNonQuery().NonQuery(sentencia) == 1) return true;
             else return false;
         }
-        public bool PuntoReciclado()
+
+        public bool Puntos()
         {
-            string sentencia = $"DELETE FROM PuntoReciclado WHERE idPunto= {IDPunto};";
+            string sentencia = $"DELETE FROM Puntos WHERE idPunto= {IDPunto};";
             if (new CDEjecutarNonQuery().NonQuery(sentencia) == 1) return true;
             else return false;
         }

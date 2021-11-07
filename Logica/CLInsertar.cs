@@ -27,11 +27,12 @@ namespace Logica
                     IDPunto = iDPunto,
                     Responsabilidad = Responsabilidad
                 };
-                if (cDInsertar.PersonaPunto()) return true;
+                if (cDInsertar.Responsabilidades()) return true;
                 else return false;
             }
             else return false;
         }
+
         public bool Puntos()
         {
             CDInsertar cDInsertar = new CDInsertar
@@ -41,9 +42,10 @@ namespace Logica
                 Espacio = Espacio,
                 Direccion = Direccion
             };
-            if (cDInsertar.PuntoReciclado()) return true;
+            if (cDInsertar.Puntos()) return true;
             else return false;
         }
+
         public bool Personas()
         {
             CDInsertar cDInsertar = new CDInsertar

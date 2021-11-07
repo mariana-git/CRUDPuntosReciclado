@@ -1,8 +1,4 @@
 ﻿using Datos;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Logica
 {
@@ -33,11 +29,12 @@ namespace Logica
                     Espacio = Espacio,
                     Direccion = Direccion
                 };
-                if (cDModificar.PuntoReciclado()) return true;
+                if (cDModificar.Puntos()) return true;
                 else return false;
             }
             else return false;
         }
+
         public bool Personas()
         {
             if (IDPersona != string.Empty && int.TryParse(IDPersona, out int iDPersona))
@@ -55,18 +52,19 @@ namespace Logica
             }
             else return false;
         }
-        public bool PersonaPunto()
+
+        public bool Responsabilidades()
         {
-            if (int.TryParse(IDPunto, out int iDPunto) && int.TryParse(IDPersona, out int iDPersona)
-                && IDPersona != string.Empty && IDPunto != string.Empty)
+            if (IDPunto != string.Empty && int.TryParse(IDPunto, out int iDPunto)
+                && IDPersona != string.Empty && int.TryParse(IDPersona, out int iDPersona))
             {
                 CDModificar cDModificar = new CDModificar
                 {
                     IDPersona = iDPersona,
-                    IDPunto = iDPunto,                    
+                    IDPunto = iDPunto,
                     Responsabilidad = Responsabilidad
                 };
-                if (cDModificar.PersonaPunto()) return true;
+                if (cDModificar.Responsabilidades()) return true;
                 else return false;
             }
             else return false;
