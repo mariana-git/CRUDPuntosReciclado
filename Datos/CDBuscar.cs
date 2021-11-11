@@ -39,6 +39,16 @@ namespace Datos
             return new CDEjecutarReader().Reader(sentencia);
         }
 
+        public int ResponsabilidadedesScalar(int idPersona, int idPunto, string responsabilidad)
+        {
+            sentencia = "SELECT pr.idPunto, DENOMINACION, DIASYHORARIOS, ESPACIO, DIRECCION, p.idPersona, NOMBRE, APELLIDO, DNI, TELEFONO, " +
+                "RESPONSABILIDAD FROM (Responsabilidades r INNER JOIN Puntos pr ON pr.idPunto = r.idPunto) " +
+                "INNER JOIN Personas p ON r.idPersona=p.idPersona WHERE r.idPersona = {idPersona} " +
+                $"AND r.idPunto = {idPunto} ADN Responsabilidad = '{responsabilidad}' ; ";
+
+            return new CDEjecutarScalar().Scalar(sentencia);
+        }
+
         #endregion
 
         #region PUNTOS

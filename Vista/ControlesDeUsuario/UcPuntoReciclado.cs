@@ -60,13 +60,13 @@ namespace Vista.ControlesDeUsuario
             OpcionesDgv();
             LimpiarGB();
             nuevo = false;
+            tabla = origen;
             lblMensajeTop.Visible = true;
             lblMensajeTop.Text = "(Doble click para Seleccionar)"; 
-            tabla = origen;
             palabra = parametro;
             dgvDatos.Visible = true;
 
-            BuscarYTraer();
+            BuscarYTraer(origen);
         }
         #endregion
 
@@ -143,14 +143,14 @@ namespace Vista.ControlesDeUsuario
                             if (cLModificar.Puntos())MessageBox.Show(exito);
                             else MessageBox.Show("Verifique los datos ingresados e inténtelo nuevamente", "ALGO FALLÓ");
                         }
-                        BuscarYTraer();
-                        LimpiarGB();
                     }
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(fallo + ex.ToString());
-                }                
+                }
+                BuscarYTraer("Puntos");
+                LimpiarGB();
             }
         }
 
@@ -197,14 +197,14 @@ namespace Vista.ControlesDeUsuario
                             else MessageBox.Show("Verifique los datos ingresados e inténtelo nuevamente", "ALGO FALLÓ");
                         }
                     }
-                    BuscarYTraer();
-                    LimpiarGB();
-                    //TODO Mejorar: se puede mostrar en la grilla el registro modificado
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(fallo + ex.ToString());
-                }                
+                }
+                BuscarYTraer("Personas");
+                LimpiarGB();
+                //TODO Mejorar: se puede mostrar en la grilla el registro modificado
             }
         }
 
@@ -215,14 +215,13 @@ namespace Vista.ControlesDeUsuario
             {
                 try
                 {
-                    CLModificar cLModificar = new CLModificar()
-                    {
-                        IDPersona = lblIDPersona.Text,
-                        IDPunto = lblIDPunto.Text,
-                        Responsabilidad = txtResponsabilidad.Text
-                    };
-                    if (cLModificar.Responsabilidades()) MessageBox.Show(exito);
-                    else
+                    CLBuscar clBuscar = new CLBuscar();
+                    clBuscar.IDPersona = lblIDPersona.Text;
+                    clBuscar.IDPunto = lblIDPunto.Text;
+                    clBuscar.Palabra = txtResponsabilidad.Text;
+                    string afecta = clBuscar.PersonasScalar();
+
+                    if (afecta == "0" && nuevo == true)
                     {
                         CLInsertar cLInsertar = new CLInsertar()
                         {
@@ -231,17 +230,36 @@ namespace Vista.ControlesDeUsuario
                             Responsabilidad = txtResponsabilidad.Text
                         };
                         if (cLInsertar.Responsabilidades()) MessageBox.Show(exito);
-                        else MessageBox.Show("Verifique los datos ingresados e inténtelo nuevamente", "ALGO FALLÓ");
+                        else MessageBox.Show("Verifique los datos ingresados e inténtelo nuevamente", "ALGO FALLÓ");                        
                     }
+                    else
+                    {
+                        DialogResult resultado = MessageBox.Show("Si modifica este registro se actualizarán también "
+                        + afecta + " registros de la tabla RESPONSABILIDAES\n\nCONTINUAR?",
+                        "ATENCION", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
-                    BuscarYTraer();
-                    LimpiarGB();
-                    //TODO Mejorar: se puede mostrar en la grilla el registro modificado
+                        if (resultado == DialogResult.OK)
+                        {
+                            CLModificar cLModificar = new CLModificar()
+                            {
+                                IDPersona = lblIDPersona.Text,
+                                IDPunto = lblIDPunto.Text,
+                                Responsabilidad = txtResponsabilidad.Text
+                            };
+                            if (cLModificar.Responsabilidades()) MessageBox.Show(exito);
+                            else MessageBox.Show("Verifique los datos ingresados e inténtelo nuevamente", "ALGO FALLÓ");
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(fallo + ex.ToString());
                 }
+
+                BuscarYTraer("Responsabilidades");
+                LimpiarGB();
+
+                //TODO Mejorar: se puede mostrar en la grilla el registro modificado
             }
         }
 
@@ -306,7 +324,7 @@ namespace Vista.ControlesDeUsuario
             CLBuscar clBuscar = new CLBuscar();
             clBuscar.IDPunto = lblIDPunto.Text;
             
-            DialogResult resultado = MessageBox.Show("Si elimina este registro se borrarán también"
+            DialogResult resultado = MessageBox.Show("Si elimina este registro se borrarán también "
                 + clBuscar.PuntosScalar() +" registros de la tabla RESPONSABILIDAES\n\nCONTINUAR?", 
                 "ATENCION", MessageBoxButtons.OKCancel,MessageBoxIcon.Warning);
             
@@ -437,9 +455,9 @@ namespace Vista.ControlesDeUsuario
 
         #region METODOS
 
-        private void PasarDgvATextBox(string tipo)
+        private void PasarDgvATextBox(string tabla)
         {
-            if (tipo == "Responsabilidades")
+            if (tabla == "Responsabilidades")
             {
                 lblIDPunto.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["idPunto"].Value.ToString();
                 txtDenominacion.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["DENOMINACION"].Value.ToString();
@@ -454,7 +472,7 @@ namespace Vista.ControlesDeUsuario
                 txtResponsabilidad.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["RESPONSABILIDAD"].Value.ToString();
 
             }
-            if (tipo == "Personas")
+            if (tabla == "Personas")
             {
                 lblIDPersona.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["idPersona"].Value.ToString();
                 txtNombre.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["NOMBRE"].Value.ToString();
@@ -462,7 +480,7 @@ namespace Vista.ControlesDeUsuario
                 txtDNI.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["DNI"].Value.ToString();
                 txtTelefono.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["TELEFONO"].Value.ToString();
             }
-            if (tipo == "Puntos")
+            if (tabla == "Puntos")
             {
                 lblIDPunto.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["idPunto"].Value.ToString();
                 txtDenominacion.Text = dgvDatos.Rows[dgvDatos.SelectedRows[0].Index].Cells["DENOMINACION"].Value.ToString();
@@ -550,7 +568,7 @@ namespace Vista.ControlesDeUsuario
             }
         }
 
-        private void BuscarYTraer()
+        private void BuscarYTraer(string tabla)
         {
             switch (tabla)
             {
@@ -562,7 +580,6 @@ namespace Vista.ControlesDeUsuario
                             Palabra = palabra
                         };
                         dgvDatos.DataSource = cLBuscar.Responsabilidades();
-
                         dgvDatos.Columns["idPunto"].Visible = false;
                         dgvDatos.Columns["idPersona"].Visible = false;
                     }

@@ -14,6 +14,7 @@ namespace Logica
         CDBuscar cDBuscar = new CDBuscar();
 
         #region RESPONSABILIDADES
+
         public DataTable Responsabilidades()
         {
             if(Palabra != string.Empty)
@@ -40,6 +41,19 @@ namespace Logica
                     return DT;
                 }
             }
+        }
+
+        public string ResponsabilidadesScalar()
+        {
+            if (IDPersona != string.Empty && IDPunto != string.Empty)
+            {
+                if (int.TryParse(IDPersona, out int idPersonas) && int.TryParse(IDPunto, out int idPunto))
+                {
+                    return cDBuscar.ResponsabilidadedesScalar(idPersonas,idPunto, Palabra).ToString();
+                }
+                else return "0";
+            }
+            else return "0";
         }
         #endregion
 
@@ -75,7 +89,7 @@ namespace Logica
         
         public string PuntosScalar()
         {
-            if (Palabra != string.Empty)
+            if (IDPunto != string.Empty)
             {
                 if (int.TryParse(IDPunto, out int idPunto))
                 {
