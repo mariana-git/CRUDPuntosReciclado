@@ -38,15 +38,15 @@ namespace Logica
 
         public bool Personas()
         {
-            if (int.TryParse(IDPersona, out int iDPersona))
+            if (int.TryParse(IDPersona, out int iDPersona) && int.TryParse(Telefono, out int telefono) && int.TryParse(DNI, out int dni))
             {
                 CDModificar cDModificar = new CDModificar
                 {
                     IDPersona = iDPersona,                    
                     Nombre = Nombre,
                     Apellido = Apellido,
-                    DNI = DNI,
-                    Telefono = Telefono                   
+                    DNI = dni,
+                    Telefono = telefono                   
                 };
                 if (cDModificar.Personas()) return true;
                 else return false;

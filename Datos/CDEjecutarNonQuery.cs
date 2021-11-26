@@ -1,18 +1,18 @@
 ﻿using System.Data;
-using System.Data.OleDb;
+using System.Data.SqlClient;
 
 namespace Datos
 {
     class CDEjecutarNonQuery : CDConexion
     {
-        internal int NonQuery(string query)
+        internal int NonQueryQ(string query)
         {
             //Método para realizar todas las consultas en modo desconectado
-            using (OleDbConnection Conexion = Conectar())
+            using (SqlConnection Conexion = Conectar())
             {
                 if (Conexion.State == ConnectionState.Open) Conexion.Close();
                 Conexion.Open();
-                using (OleDbCommand Comando = new OleDbCommand(query, Conexion))
+                using (SqlCommand Comando = new SqlCommand(query, Conexion))
                 {
                     return Comando.ExecuteNonQuery();
                 }

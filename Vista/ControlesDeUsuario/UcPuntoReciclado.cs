@@ -7,7 +7,7 @@ namespace Vista.ControlesDeUsuario
     public partial class UcPuntoReciclado : UserControl
     {
         #region ATRIBUTOS
-        string tabla, palabra;
+        string tabla, palabra = "";
         bool nuevo;
         readonly string fallo = "No se ha podido realizar la operación.\n\n";
         readonly string exito = "Operación realizada con éxito.\n\n";
@@ -108,8 +108,10 @@ namespace Vista.ControlesDeUsuario
             {
                 try
                 {
-                    CLBuscar clBuscar = new CLBuscar();
-                    clBuscar.IDPunto = lblIDPunto.Text;
+                    CLBuscar clBuscar = new CLBuscar
+                    {
+                        IDPunto = lblIDPunto.Text
+                    };
                     string afecta = clBuscar.PuntosScalar();
 
                     if(afecta == "0" && nuevo == true)
@@ -161,8 +163,10 @@ namespace Vista.ControlesDeUsuario
             {
                 try
                 {
-                    CLBuscar clBuscar = new CLBuscar();
-                    clBuscar.IDPersona = lblIDPersona.Text;
+                    CLBuscar clBuscar = new CLBuscar
+                    {
+                        IDPersona = lblIDPersona.Text
+                    };
                     string afecta = clBuscar.PersonasScalar();
 
                     if (afecta == "0" && nuevo == true)
@@ -204,7 +208,6 @@ namespace Vista.ControlesDeUsuario
                 }
                 BuscarYTraer("Personas");
                 LimpiarGB();
-                //TODO Mejorar: se puede mostrar en la grilla el registro modificado
             }
         }
 
@@ -213,13 +216,15 @@ namespace Vista.ControlesDeUsuario
             if (TextBoxVacio(gbPersonas)||TextBoxVacio(gbPuntos)|| TextBoxVacio(gbResponsabilidad)) MessageBox.Show("Debe completar todos los datos");
             else
             {
-                try
-                {
-                    CLBuscar clBuscar = new CLBuscar();
-                    clBuscar.IDPersona = lblIDPersona.Text;
-                    clBuscar.IDPunto = lblIDPunto.Text;
-                    clBuscar.Palabra = txtResponsabilidad.Text;
-                    string afecta = clBuscar.PersonasScalar();
+                //try
+                //{
+                    CLBuscar clBuscar = new CLBuscar
+                    {
+                        IDPersona = lblIDPersona.Text,
+                        IDPunto = lblIDPunto.Text,
+                        Palabra = txtResponsabilidad.Text
+                    };
+                    string afecta = clBuscar.ResponsabilidadesScalar();
 
                     if (afecta == "0" && nuevo == true)
                     {
@@ -231,6 +236,10 @@ namespace Vista.ControlesDeUsuario
                         };
                         if (cLInsertar.Responsabilidades()) MessageBox.Show(exito);
                         else MessageBox.Show("Verifique los datos ingresados e inténtelo nuevamente", "ALGO FALLÓ");                        
+                    }
+                    else if (afecta != "0" && nuevo == true)
+                    {
+                        MessageBox.Show("Ya existe un registro idéntico", "ATENCION");
                     }
                     else
                     {
@@ -250,16 +259,14 @@ namespace Vista.ControlesDeUsuario
                             else MessageBox.Show("Verifique los datos ingresados e inténtelo nuevamente", "ALGO FALLÓ");
                         }
                     }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(fallo + ex.ToString());
-                }
+                //}
+                //catch (Exception ex)
+                //{
+                //    MessageBox.Show(fallo + ex.ToString());
+                //}
 
                 BuscarYTraer("Responsabilidades");
                 LimpiarGB();
-
-                //TODO Mejorar: se puede mostrar en la grilla el registro modificado
             }
         }
 
@@ -321,9 +328,12 @@ namespace Vista.ControlesDeUsuario
 
         private void BtnEliminarPunto_Click(object sender, EventArgs e)
         {
-            CLBuscar clBuscar = new CLBuscar();
-            clBuscar.IDPunto = lblIDPunto.Text;
-            
+            CLBuscar cLBuscar = new CLBuscar
+            {
+                IDPunto = lblIDPunto.Text
+            };
+            CLBuscar clBuscar = cLBuscar;
+
             DialogResult resultado = MessageBox.Show("Si elimina este registro se borrarán también "
                 + clBuscar.PuntosScalar() +" registros de la tabla RESPONSABILIDAES\n\nCONTINUAR?", 
                 "ATENCION", MessageBoxButtons.OKCancel,MessageBoxIcon.Warning);
@@ -355,8 +365,10 @@ namespace Vista.ControlesDeUsuario
 
         private void BtnEliminarPersona_Click(object sender, EventArgs e)
         {
-            CLBuscar clBuscar = new CLBuscar();
-            clBuscar.IDPersona = lblIDPersona.Text;
+            CLBuscar clBuscar = new CLBuscar
+            {
+                IDPersona = lblIDPersona.Text
+            };
 
             DialogResult resultado = MessageBox.Show("Si elimina este registro se borrarán también "
                 + clBuscar.PersonasScalar() + " registros de la tabla RESPONSABILIDAES\n\nCONTINUAR?",

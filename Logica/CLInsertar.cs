@@ -50,15 +50,19 @@ namespace Logica
 
         public bool Personas()
         {
-            CDInsertar cDInsertar = new CDInsertar
+            if (int.TryParse(Telefono, out int telefono) && int.TryParse(DNI, out int dni))
             {
-                Nombre = Nombre,
-                Apellido = Apellido,
-                DNI = DNI,
-                Telefono = Telefono
-            };
-            if (cDInsertar.Personas()) return true;
-            else return false;
+                CDInsertar cDInsertar = new CDInsertar
+                {
+                    Nombre = Nombre,
+                    Apellido = Apellido,
+                    DNI = dni,
+                    Telefono = telefono
+                };
+                if (cDInsertar.Personas()) return true;
+                else return false;
+            }
+            else return false;            
         }
     }
 }

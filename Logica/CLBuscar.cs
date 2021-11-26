@@ -5,13 +5,14 @@ namespace Logica
 {
     public class CLBuscar
     {
+
+        CDBuscar cDBuscar = new CDBuscar();
+
         #region ATRIBUTOS
         public string Palabra { private get; set; }
         public string IDPersona { private get; set; }
         public string IDPunto { private get; set; }
         #endregion
-
-        CDBuscar cDBuscar = new CDBuscar();
 
         #region RESPONSABILIDADES
 
@@ -49,7 +50,7 @@ namespace Logica
             {
                 if (int.TryParse(IDPersona, out int idPersonas) && int.TryParse(IDPunto, out int idPunto))
                 {
-                    return cDBuscar.ResponsabilidadedesScalar(idPersonas,idPunto, Palabra).ToString();
+                    return cDBuscar.ResponsabilidadesScalar(idPersonas,idPunto, Palabra).ToString();
                 }
                 else return "0";
             }

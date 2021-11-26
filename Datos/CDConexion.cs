@@ -1,4 +1,5 @@
-﻿using System.Data.OleDb;
+﻿using System.Data;
+using System.Data.SqlClient;
 
 namespace Datos
 {
@@ -6,11 +7,14 @@ namespace Datos
     {
         private readonly string cadena;
 
-        public CDConexion() => cadena = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source = |DataDirectory|dbPuntosReciclado.accdb; Persist Security Info=False;";
+        public CDConexion() => cadena = "server= localhost ; database= PuntosDeReciclado ; integrated security = true";
 
-        protected OleDbConnection Conectar()
+        protected SqlConnection Conectar()
         {
-            return new OleDbConnection(cadena);
+            SqlConnection sqlConnection = new SqlConnection(cadena);
+            if (sqlConnection.State == ConnectionState.Open) sqlConnection.Close();
+            sqlConnection.Open();
+            return sqlConnection;
         }
     }
 }

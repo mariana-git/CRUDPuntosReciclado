@@ -1,22 +1,22 @@
-﻿using System.Data;
-using System.Data.OleDb;
+﻿using System;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace Datos
 {
     class CDEjecutarScalar : CDConexion
     {
-        internal int Scalar(string query)
+        internal int ScalarQ(string query)
         {
-            //Método para realizar todas las consultas en modo desconectado
-            using (OleDbConnection Conexion = Conectar())
+            using (SqlConnection Conexion = Conectar())
             {
                 if (Conexion.State == ConnectionState.Open) Conexion.Close();
                 Conexion.Open();
-                using (OleDbCommand Comando = new OleDbCommand(query, Conexion))
+                using (SqlCommand Comando = new SqlCommand(query, Conexion))
                 {
-                    return (int)Comando.ExecuteScalar();
+                    return Convert.ToInt32(Comando.ExecuteScalar());
                 }
             }
-        }
+        }        
     }
 }

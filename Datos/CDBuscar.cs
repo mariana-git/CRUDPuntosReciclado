@@ -10,43 +10,25 @@ namespace Datos
 
         public DataTable Responsabilidades()
         {
-            sentencia = "SELECT pr.idPunto, DENOMINACION, DIASYHORARIOS, ESPACIO, DIRECCION, p.idPersona, NOMBRE, APELLIDO, DNI, TELEFONO, " +
-                "RESPONSABILIDAD FROM (Responsabilidades r INNER JOIN Puntos pr ON pr.idPunto = r.idPunto) " +
-                "INNER JOIN Personas p ON r.idPersona=p.idPersona;";
-            
-            return new CDEjecutarReader().Reader(sentencia);
+            return new CDEjecutarReader().ReaderSP("spResponsabilidades_Leer");
         }
 
         public DataTable Responsabilidades(string parametro)
         {
-            sentencia = "SELECT pr.idPunto,DENOMINACION, DIASYHORARIOS, ESPACIO, DIRECCION, p.idPersona, NOMBRE, APELLIDO, DNI, TELEFONO,  " +
-                "RESPONSABILIDAD FROM (Responsabilidades r INNER JOIN Puntos pr ON pr.idPunto = r.idPunto) " +
-                $"INNER JOIN Personas p ON r.idPersona=p.idPersona WHERE denominacion LIKE '%{parametro}%' OR " +
-                $" ESPACIO LIKE '%{parametro}%' OR DIRECCION LIKE '%{parametro}%' OR NOMBRE LIKE '%{parametro}%' OR " +
-                $"APELLIDO LIKE '%{parametro}%' OR DNI LIKE '%{parametro}%' OR TELEFONO LIKE '%{parametro}%' " +
-                $"OR RESPONSABILIDAD LIKE '%{parametro}%';";
-
-            return new CDEjecutarReader().Reader(sentencia);
+            return new CDEjecutarReader().ReaderSP("spResponsabilidades_BuscarString",parametro);
         }
 
         public DataTable Responsabilidades(int parametro)
         {
-            sentencia = "SELECT pr.idPunto, DENOMINACION, DIASYHORARIOS, ESPACIO, DIRECCION, p.idPersona, NOMBRE, APELLIDO, DNI, TELEFONO,  " +
-                "RESPONSABILIDAD FROM (Responsabilidades r INNER JOIN Puntos pr ON pr.idPunto= r.idPunto) " +
-                $"INNER JOIN Personas p ON r.idPersona=p.idPersona WHERE p.idPersona LIKE '%{parametro}%' OR " +
-                $" pr.idPunto LIKE '%{parametro}%';";
-
-            return new CDEjecutarReader().Reader(sentencia);
+            return new CDEjecutarReader().ReaderSP("spResponsabilidades_BuscarInt", parametro);
         }
 
-        public int ResponsabilidadedesScalar(int idPersona, int idPunto, string responsabilidad)
+        public int ResponsabilidadesScalar(int idPersona, int idPunto, string responsabilidad)
         {
-            sentencia = "SELECT pr.idPunto, DENOMINACION, DIASYHORARIOS, ESPACIO, DIRECCION, p.idPersona, NOMBRE, APELLIDO, DNI, TELEFONO, " +
-                "RESPONSABILIDAD FROM (Responsabilidades r INNER JOIN Puntos pr ON pr.idPunto = r.idPunto) " +
-                "INNER JOIN Personas p ON r.idPersona=p.idPersona WHERE r.idPersona = {idPersona} " +
-                $"AND r.idPunto = {idPunto} ADN Responsabilidad = '{responsabilidad}' ; ";
-
-            return new CDEjecutarScalar().Scalar(sentencia);
+            sentencia = $"SELECT COUNT(*) FROM Responsabilidades r INNER JOIN Puntos pr ON pr.idPunto = r.idPunto"+
+                        $" INNER JOIN Personas p ON r.idPersona = p.idPersona WHERE r.idPersona = {idPersona} AND " +
+                        $"r.idPunto = {idPunto} AND RESPONSABILIDAD = '{responsabilidad}'";
+            return new CDEjecutarScalar().ScalarQ(sentencia);
         }
 
         #endregion
@@ -58,29 +40,29 @@ namespace Datos
             sentencia = $"SELECT * FROM Puntos WHERE DENOMINACION LIKE '%{parametro}%'" +
                 $"OR ESPACIO LIKE '%{parametro}%' OR DIRECCION LIKE '%{parametro}%' ;";
 
-            return new CDEjecutarReader().Reader(sentencia);
+            return new CDEjecutarReader().ReaderQ(sentencia);
         }
 
         public DataTable Puntos(int parametro)
         {
             sentencia = $"SELECT * FROM Puntos WHERE idPunto LIKE '%{parametro}%';";
 
-            return new CDEjecutarReader().Reader(sentencia);
+            return new CDEjecutarReader().ReaderQ(sentencia);
         }
 
         public DataTable Puntos()
         {
             sentencia = $"SELECT * FROM Puntos;";
 
-            return new CDEjecutarReader().Reader(sentencia);
+            return new CDEjecutarReader().ReaderQ(sentencia);
         }
 
         public int PuntosScalar(int idPunto)
         {
-            sentencia = "SELECT COUNT(*) FROM (Responsabilidades r INNER JOIN Puntos pr ON pr.idPunto = r.idPunto) " +
+            sentencia = "SELECT COUNT(*) FROM Responsabilidades r INNER JOIN Puntos pr ON pr.idPunto = r.idPunto " +
                 $"INNER JOIN Personas p ON r.idPersona=p.idPersona WHERE r.idPunto = {idPunto} ; ";
 
-            return new CDEjecutarScalar().Scalar(sentencia);
+            return new CDEjecutarScalar().ScalarQ(sentencia);
         }
         #endregion
 
@@ -88,32 +70,31 @@ namespace Datos
 
         public DataTable Personas(string parametro)
         {
-            sentencia = $"SELECT * FROM Personas WHERE NOMBRE LIKE '%{parametro}%' OR APELLIDO LIKE '%{parametro}%'" +
-                $" OR DNI LIKE '%{parametro}%' OR TELEFONO LIKE '%{parametro}%';";
+            sentencia = $"SELECT * FROM Personas WHERE NOMBRE LIKE '%{parametro}%' OR APELLIDO LIKE '%{parametro}%';";
 
-            return new CDEjecutarReader().Reader(sentencia);
+            return new CDEjecutarReader().ReaderQ(sentencia);
         }
 
         public DataTable Personas(int parametro)
         {
             sentencia = $"SELECT * FROM Personas WHERE idPersona LIKE '%{parametro}%';";
 
-            return new CDEjecutarReader().Reader(sentencia);
+            return new CDEjecutarReader().ReaderQ(sentencia);
         }
 
         public DataTable Personas()
         {
             sentencia = $"SELECT * FROM Personas;";
 
-            return new CDEjecutarReader().Reader(sentencia);
+            return new CDEjecutarReader().ReaderQ(sentencia);
         }
 
         public int PersonasScalar(int idPersona)
         {
-            sentencia = "SELECT COUNT(*) FROM (Responsabilidades r INNER JOIN Puntos pr ON pr.idPunto = r.idPunto) " +
+            sentencia = "SELECT COUNT(*) FROM Responsabilidades r INNER JOIN Puntos pr ON pr.idPunto = r.idPunto " +
                 $"INNER JOIN Personas p ON r.idPersona=p.idPersona WHERE r.idPersona = {idPersona} ; ";
 
-            return new CDEjecutarScalar().Scalar(sentencia);
+            return new CDEjecutarScalar().ScalarQ(sentencia);
         }
         #endregion
     }
