@@ -587,11 +587,8 @@ namespace Vista.ControlesDeUsuario
                 case "Responsabilidades":
                     try
                     {
-                        CLBuscar cLBuscar = new CLBuscar
-                        {
-                            Palabra = palabra
-                        };
-                        dgvDatos.DataSource = cLBuscar.Responsabilidades();
+                        CLBuscar cLBuscar = new CLBuscar();
+                        dgvDatos.DataSource = cLBuscar.Responsabilidades(palabra);
                         dgvDatos.Columns["idPunto"].Visible = false;
                         dgvDatos.Columns["idPersona"].Visible = false;
                     }

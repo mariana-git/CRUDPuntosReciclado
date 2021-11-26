@@ -16,9 +16,9 @@ namespace Logica
 
         #region RESPONSABILIDADES
 
-        public DataTable Responsabilidades()
+        public DataTable Responsabilidades(string Palabra)
         {
-            if(Palabra != string.Empty)
+            if(Palabra != "")
             {
                 if (int.TryParse(Palabra, out int numero))
                 {
@@ -43,7 +43,14 @@ namespace Logica
                 }
             }
         }
-
+        public DataTable Responsabilidades()
+        {
+            using (DataTable DT = cDBuscar.Responsabilidades())
+                {
+                    return DT;
+            }
+            
+        }
         public string ResponsabilidadesScalar()
         {
             if (IDPersona != string.Empty && IDPunto != string.Empty)
